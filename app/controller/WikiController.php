@@ -33,7 +33,7 @@ class WikiController
                     $imagePath = "/wiki/public/uploads/" . $_FILES['image']['name'];
                     $wiki = new Wiki(null, $title, $content, $imagePath, null, null, $categoryId);
                     $this->wikiModel->save($wiki);
-                    header("Location: http://localhost/wiki/displayWiki");
+                    header("Location: displayWiki");
                     exit;
                 } else {
                     echo "Image upload failed";
@@ -55,6 +55,21 @@ class WikiController
         }
     }
 
+
+    public function deleteWiki()
+    {
+        
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'])) {
+            $wikiId = $_POST['id'];
+            $userId = $_SESSION["userId"];
+
+           
+            $this->wikiModel->deleteById2($wikiId, $userId);
+            header("Location: displayWiki");
+            exit;
+        }
+    }
+    
 
 
 

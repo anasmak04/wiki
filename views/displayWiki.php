@@ -206,11 +206,20 @@
                         <a href="#" class="card-title hover:underline">
                             <?php echo $wiki->title; ?>
                         </a>
+
+                        <a href="#" class="card-title hover:underline">
+                            <?php echo $wiki->id; ?>
+                        </a>
                     </h3>
 
                     <p class="card-text">
                         <?php echo $wiki->content; ?>
                     </p>
+
+                    <form action="wdelete" method="POST">
+                        <input type="hidden" name="id" value="<?= $wiki->id ?>">
+                        <button type="submit">delete</button>
+                    </form>
                 </div>
             </div>
         <?php endforeach; ?>

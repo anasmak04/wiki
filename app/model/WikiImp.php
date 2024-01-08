@@ -38,9 +38,9 @@ class WikiImp implements DataRepository
                 $statement->execute([$title, $content, $image, $date, $authorId, $categoryId]);
 
                 $wikiId = $this->database->lastInsertId();
-                
+
                 $tag = new TagImp();
-                $tagId = $tag->getLastInsertedId();       
+                $tagId = $tag->getLastInsertedId();
                 $wikitagQuery = "INSERT INTO `wikitag`(`wiki_id`, `tag_id`) VALUES (?, ?)";
                 $wikitagStatement = $this->database->prepare($wikitagQuery);
                 $wikitagStatement->execute([$wikiId, $tagId]);
@@ -108,7 +108,7 @@ class WikiImp implements DataRepository
     public function findById($id)
     {
         try {
-            $query = "SELECT * FROM user WHERE id = ? ";
+            $query = "SELECT * FROM `wiki` WHERE id = ? ";
             $statement = $this->database->prepare($query);
             $statement->execute([$id]);
             $wiki = $statement->fetch();
@@ -117,6 +117,19 @@ class WikiImp implements DataRepository
             error_log("something went wrong in database : " . $e->getMessage());
         } catch (Exception $e) {
             error_log("Error : " . $e->getMessage());
+        }
+    }
+
+    public function deleteById2($wikiId, $userId)
+    {
+        try {
+            $query = "DELETE FROM `wiki` WHERE id = ? AND author_id = ?";
+            $statement = $this->database->prepare($query);
+            $statement->execute([$wikiId, $userId]);
+        } catch (PDOException $e) {
+            error_log("Something went wrong in the database: " . $e->getMessage());
+        } catch (Exception $e) {
+            error_log("Error: " . $e->getMessage());
         }
     }
 }

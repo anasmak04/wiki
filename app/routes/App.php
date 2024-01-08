@@ -33,6 +33,7 @@ $router->setRoutes([
         "savecategory" => ["CategoryController", "save"],
         "saveTag" => ["TagsController", "save"],
         "deleteUser" => ["UserController", "deleteUser"],
+        "wdelete" => ["WikiController", "deleteWiki"],
     ]
 ]);
 

@@ -104,7 +104,8 @@ class UserController
     }
 
 
-    public function deleteUser(){
+    public function deleteUser()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["id"])) {
             $id = $_POST["id"];
             $this->userModel->deleteById($id);
