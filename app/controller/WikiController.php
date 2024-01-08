@@ -69,8 +69,26 @@ class WikiController
             exit;
         }
     }
+
+
+    public function updateWiki(){
+          
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'])) {
+            $wikiId = $_POST['id'];
+            $userId = $_SESSION["userId"];
+            $this->wikiModel->update2($wikiId, $userId);
+            header("Location: displayWiki");
+            exit;
+        }
+    }
     
 
+    public function updateview() {
+        $id = $_GET["id"];
+        $wiki = $this->wikiModel->findById($id);
+        require_once "../../views/updateview.php";
+    }
+    
 
 
     // public function findByIdUser(){
@@ -89,6 +107,7 @@ class WikiController
 
     public function wiki()
     {
+
         require_once("../../views/displayWiki.php");
     }
 }

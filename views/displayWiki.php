@@ -139,92 +139,89 @@
                 <div class="container">
 
                     <h1 class="h1 hero-title">
-                        Hey, we’re Blogy See our thoughts, stories and ideas.
+                        👋Welcome back <?= $_SESSION["username"]; ?> !
                     </h1>
 
-                    <div class="wrapper">
 
-                        <form action="" class="newsletter-form">
-                            <input type="email" name="email_address" placeholder="Your email address" class="email-field">
-
-                            <button type="submit" class="btn">Subscribe</button>
-                        </form>
-
-                        <p class="newsletter-text">
-                            Get the email newsletter and unlock access to members-only content and updates
-                        </p>
-
-                    </div>
 
                 </div>
             </section>
 
 
 
-     
 
 
 
-<section class="section featured" aria-label="featured post">
-    <div class="container container1">
-        <?php foreach ($wikis as $wiki) : ?>
-            <p class="section-subtitle">
-                Get started with our <strong class="strong">best stories</strong>
-            </p>
 
-            <div class="blog-card">
-                <figure class="card-banner img-holder" style="--width: 500; --height: 600;">
-                    <img src="<?php echo $wiki->image; ?>" width="500" height="600" loading="lazy" alt="New technology is not good or evil in and of itself" class="img-cover">
-                    <ul class="avatar-list absolute">
-                        <li class="avatar-item">
-                            <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
-                                <img src="./assets/images/author-1.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
-                            </a>
-                        </li>
-                        <li class="avatar-item">
-                            <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
-                                <img src="./assets/images/author-2.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
-                            </a>
-                        </li>
-                    </ul>
-                </figure>
+            <section class="section featured" aria-label="featured post">
+                <div class="container container1">
+                    <?php foreach ($wikis as $wiki) : ?>
+                        <p class="section-subtitle">
+                            Get started with our <strong class="strong">best stories</strong>
+                        </p>
 
-                <div class="card-content">
-                    <ul class="card-meta-list">
-                        <li>
-                            <a href="#" class="card-tag">Design</a>
-                        </li>
-                        <li>
-                            <a href="#" class="card-tag">Idea</a>
-                        </li>
-                        <li>
-                            <a href="#" class="card-tag">Review</a>
-                        </li>
-                    </ul>
+                        <div class="blog-card">
+                            <figure class="card-banner img-holder" style="--width: 500; --height: 600;">
+                                <img src="<?php echo $wiki->image; ?>" width="500" height="600" loading="lazy" alt="New technology is not good or evil in and of itself" class="img-cover">
+                                <ul class="avatar-list absolute">
+                                    <li class="avatar-item">
+                                        <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
+                                            <img src="./assets/images/author-1.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
+                                        </a>
+                                    </li>
+                                    <li class="avatar-item">
+                                        <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
+                                            <img src="./assets/images/author-2.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </figure>
 
-                    <h3 class="h4">
-                        <a href="#" class="card-title hover:underline">
-                            <?php echo $wiki->title; ?>
-                        </a>
+                            <div class="card-content">
+                                <ul class="card-meta-list">
+                                    <li>
+                                        <a href="#" class="card-tag">Design</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="card-tag">Idea</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="card-tag">Review</a>
+                                    </li>
+                                </ul>
 
-                        <a href="#" class="card-title hover:underline">
-                            <?php echo $wiki->id; ?>
-                        </a>
-                    </h3>
+                                <h3 class="h4">
+                                    <a href="#" class="card-title hover:underline">
+                                        <?php echo $wiki->title; ?>
+                                    </a>
 
-                    <p class="card-text">
-                        <?php echo $wiki->content; ?>
-                    </p>
+                                    <a href="#" class="card-title hover:underline">
+                                        <?php echo $wiki->id; ?>
+                                    </a>
+                                </h3>
 
-                    <form action="wdelete" method="POST">
-                        <input type="hidden" name="id" value="<?= $wiki->id ?>">
-                        <button type="submit">delete</button>
-                    </form>
+                                <p class="card-text">
+                                    <?php echo $wiki->content; ?>
+                                </p>
+
+
+                                <form action="wdelete" method="POST">
+                                    <input type="hidden" name="id" value="<?= $wiki->id ?>">
+                                    <button type="submit">delete</button>
+                                </form>
+
+                                <form action="update" method="GET">*
+                                    <input type="hidden" name="id" value="<?= $wiki->id ?>">
+                                    <button>edit</button>
+                                </form>
+
+
+
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
-</section>
+            </section>
 
 
             <!-- 

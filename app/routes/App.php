@@ -23,6 +23,7 @@ $router->setRoutes([
         "tags" => ["TagsController", "index"],
         "users" => ["UserController", "viewAdmin"],
         "users" => ["UserController", "getAllUsers"],
+        "update" => ["WikiController","updateview"]
     ],
 
     'POST' => [
@@ -34,6 +35,8 @@ $router->setRoutes([
         "saveTag" => ["TagsController", "save"],
         "deleteUser" => ["UserController", "deleteUser"],
         "wdelete" => ["WikiController", "deleteWiki"],
+         "wupdate" => ["WikiController", "updateWiki"],
+        
     ]
 ]);
 
