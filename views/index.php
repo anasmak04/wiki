@@ -12,14 +12,11 @@
 <body>
 
 
-    <?php
-    session_start();
-    ?>
 
 
 
     <header>
-        <p>welcome : <?= $_SESSION["username"] ?></p>
+        <!-- <p>welcome : <?= $_SESSION["username"] ?></p> -->
         <h1>wiki Insert Page</h1>
     </header>
     <main>
@@ -42,6 +39,14 @@
                 <select id="category_id" name="category_id">
                     <?php foreach ($categories as $category) { ?>
                         <option value="<?= $category->id ?>"><?= $category->name ?></option>
+                    <?php } ?>
+                </select><br><br>
+
+                <label for="category_id">Tags:</label>
+
+                <select id="" name="tag">
+                    <?php foreach ($tags as $tag) { ?>
+                        <option value="<?= $tag->id ?>"><?= $tag->name ?></option>
                     <?php } ?>
                 </select><br><br>
             </fieldset>

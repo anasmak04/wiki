@@ -4,6 +4,7 @@ namespace App\model;
 
 use App\dao\DataRepository;
 use App\config\Dbconfig;
+use App\entity\Tag;
 use Exception;
 use PDOException;
 
@@ -31,9 +32,18 @@ class WikiImp implements DataRepository
             $categoryId = $wiki->getCategoryId();
 
             if (!empty($title) && !empty($content) && !empty($date) && !empty($authorId) && !empty($categoryId)) {
+
                 $query = "INSERT INTO `wiki`(`title`, `content`, `image`, `created_at`, `author_id`, `category_id`) VALUES (?,?,?,?,?,?)";
                 $statement = $this->database->prepare($query);
                 $statement->execute([$title, $content, $image, $date, $authorId, $categoryId]);
+
+                $wikiId = $this->database->lastInsertId();
+                
+                $tag = new TagImp();
+                $tagId = $tag->getLastInsertedId();       
+                $wikitagQuery = "INSERT INTO `wikitag`(`wiki_id`, `tag_id`) VALUES (?, ?)";
+                $wikitagStatement = $this->database->prepare($wikitagQuery);
+                $wikitagStatement->execute([$wikiId, $tagId]);
             } else {
                 throw new Exception("Required fields are empty.");
             }
@@ -82,7 +92,8 @@ class WikiImp implements DataRepository
     public function findAll()
     {
         try {
-            $query = "SELECT * FROM wiki";
+            $query = "SELECT w.* , u.name AS Author, c.name AS categoryName FROM wiki w LEFT JOIN user u ON w.author_id = u.id LEFT JOIN category c ON w.category_id = c.id";
+
             $statement = $this->database->prepare($query);
             $statement->execute();
             $wikis = $statement->fetchAll();
@@ -100,6 +111,8 @@ class WikiImp implements DataRepository
             $query = "SELECT * FROM user WHERE id = ? ";
             $statement = $this->database->prepare($query);
             $statement->execute([$id]);
+            $wiki = $statement->fetch();
+            return $wiki;
         } catch (PDOException $e) {
             error_log("something went wrong in database : " . $e->getMessage());
         } catch (Exception $e) {

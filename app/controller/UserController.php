@@ -60,7 +60,7 @@ class UserController
     public function viewProfile()
     {
         session_start();
-        $userId = $_SESSION["userId"]; 
+        $userId = $_SESSION["userId"];
         $user = $this->userModel->findById($userId);
 
 
@@ -71,27 +71,45 @@ class UserController
         }
     }
 
- 
+
     public function updateProfile()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submitUpdate"])) {
             session_start();
-            $userId = $_SESSION["userId"]; 
-            $user = new User(null,null,null,null,null,null); 
+            $userId = $_SESSION["userId"];
+            $user = new User(null, null, null, null, null, null);
             $user->setId($userId);
-    
+
             $user->setName($_POST["name"]);
             $user->setUsername($_POST["username"]);
             $user->setEmail($_POST["email"]);
-    
-            $this->userModel->update($user); 
-    
-            header("Location: http://localhost/wiki/profile");
+
+            $this->userModel->update($user);
+
+            header("Location: profile");
             exit;
         }
     }
-    
 
-  
+    public function viewAdmin()
+    {
+        require_once "../../views/users.php";
+    }
 
+
+    public function getAllUsers()
+    {
+        $users =  $this->userModel->findAll();
+        require_once "../../views/users.php";
+    }
+
+
+    public function deleteUser(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["id"])) {
+            $id = $_POST["id"];
+            $this->userModel->deleteById($id);
+            header("Location: users");
+            exit;
+        }
+    }
 }

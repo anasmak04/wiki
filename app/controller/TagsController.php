@@ -3,6 +3,7 @@
 namespace App\controller;
 
 use App\entity\Tag;
+use App\model\CategoryImp;
 use App\model\TagImp;
 
 class TagsController
@@ -10,10 +11,12 @@ class TagsController
 
 
     private $TagsModel;
+    private $CategpryModel;
 
     public function __construct()
     {
         $this->TagsModel = new TagImp();
+        $this->CategpryModel = new CategoryImp();
     }
 
 
@@ -29,5 +32,11 @@ class TagsController
     public function index()
     {
         require_once "../../views/tags.php";
+    }
+
+    public function getAll(){
+        $tags = $this->TagsModel->findAll();
+        $categories = $this->CategpryModel->findAll();
+        require_once "../../views/index.php";
     }
 }

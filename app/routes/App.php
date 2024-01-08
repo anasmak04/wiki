@@ -13,13 +13,16 @@ $router->setRoutes([
         "login" => ["UserController", "viewLogin"],
         "index" => ["UserController", "viewHome"],
         "profile" => ["UserController", "viewProfile"],
-        "index" => ["CategoryController", "findAllCategories"],
+        // "index" => ["CategoryController", "findAllCategories"],
+        "index" => ["TagsController", "getAll"],
         "displayWiki" => ["WikiController", "wiki"],
         "displayWiki" => ["WikiController", "findAllWikis"],
         "dashbord" => ["AdminController", "index"],
         "dashbord" => ["AdminController", "Count"],
         "category" => ["CategoryController", "viewcategory"],
         "tags" => ["TagsController", "index"],
+        "users" => ["UserController", "viewAdmin"],
+        "users" => ["UserController", "getAllUsers"],
     ],
 
     'POST' => [
@@ -29,6 +32,7 @@ $router->setRoutes([
         "profile" => ["UserController", "updateProfile"],
         "savecategory" => ["CategoryController", "save"],
         "saveTag" => ["TagsController", "save"],
+        "deleteUser" => ["UserController", "deleteUser"],
     ]
 ]);
 

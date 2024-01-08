@@ -25,15 +25,15 @@ class CategoryController
     }
 
 
-    public function findAllCategories()
-    {
-        $categories = $this->categoryModel->findAll();
-        if (!empty($categories)) {
-            require_once  "../../views/index.php";
-        } else {
-            echo "Categories not found.";
-        }
-    }
+    // public function findAllCategories()
+    // {
+    //     $categories = $this->categoryModel->findAll();
+    //     if (!empty($categories)) {
+    //         require_once  "../../views/index.php";
+    //     } else {
+    //         echo "Categories not found.";
+    //     }
+    // }
 
     public function viewcategory()
     {

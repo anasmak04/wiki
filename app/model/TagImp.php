@@ -36,6 +36,21 @@ class TagImp implements DataRepository
         }
     }
 
+    public function getLastInsertedId()
+    {
+        try {
+            $query = "SELECT id FROM `tag` ORDER BY id DESC LIMIT 1";
+            $statement = $this->database->prepare($query);
+            $statement->execute();
+            $lastInsertedId = $statement->fetchColumn();
+            return $lastInsertedId !== false ? $lastInsertedId : null;
+        } catch (PDOException $e) {
+            error_log("Something went wrong in the database: " . $e->getMessage());
+            return null;
+        }
+    }
+
+
     public function update($entity)
     {
     }
@@ -44,6 +59,17 @@ class TagImp implements DataRepository
     }
     public function findAll()
     {
+        try {
+            $query = "SELECT * from tag";
+            $statement = $this->database->prepare($query);
+            $statement->execute();
+            $tags = $statement->fetchAll();
+            return $tags;
+        } catch (PDOException $e) {
+            error_log("something went wrong in database : " . $e->getMessage());
+        } catch (Exception $e) {
+            error_log("Error : " . $e->getMessage());
+        }
     }
     public function findById($id)
     {
