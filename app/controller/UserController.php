@@ -103,6 +103,14 @@ class UserController
         require_once "../../views/users.php";
     }
 
+    public function logoutview()
+    {
+        session_start();
+        session_destroy();
+        header("Location: login");
+        exit;
+    }
+
 
     public function deleteUser()
     {

@@ -117,18 +117,20 @@ class UserImp implements DataRepository, AuthRepository
             $statement->execute([$email]);
             $user = $statement->fetch();
             session_start();
-
             $_SESSION["role"] = $user->roleId;
             $_SESSION["userId"] = $user->id_user;
             $_SESSION["username"] = $user->userName;
 
             if ($user && password_verify($password, $user->hashedPassword)) {
                 if ($_SESSION["role"] == 2) {
-                    header("Location: http://localhost/wiki/index");
+                    header("Location: displayWiki");
                     exit();
                 }
-            } else {
-                header("Location: http://localhost/wiki/index");
+                
+            }
+
+            else {
+                header("Location: displayWiki");
                 exit();
             }
         } catch (PDOException $e) {

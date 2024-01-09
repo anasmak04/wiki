@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/wiki/public/css/style.css">
 </head>
 
+<style></style>
+
 <body>
 
     <div class="container">

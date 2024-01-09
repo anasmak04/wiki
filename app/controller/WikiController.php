@@ -110,4 +110,7 @@ class WikiController
 
         require_once("../../views/displayWiki.php");
     }
+
+
+    
 }

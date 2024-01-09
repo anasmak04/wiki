@@ -60,6 +60,12 @@
 
 </head>
 
+<style>
+    .logout {
+        background-color: red;
+    }
+</style>
+
 <body>
 
 
@@ -82,9 +88,6 @@
                         <a href="#" class="navbar-link hover:underline" data-nav-link>Recent Post</a>
                     </li>
 
-                    <li class="navbar-item">
-                        <a href="#" class="navbar-link hover:underline" data-nav-link>Membership</a>
-                    </li>
 
                 </ul>
             </nav>
@@ -98,7 +101,23 @@
                     <span class="span three"></span>
                 </button>
 
-                <a href="#" class="btn">Join</a>
+                <?php
+                if ($_SESSION["role"] == 2) { ?>
+                    <a href="http://localhost/wiki/logout" class="btn logout">Logout</a>
+                    
+                <?php
+                }
+                ?>
+
+                <?php
+                if ($_SESSION["role"] !== 2) { ?>
+                    <a href="#" class="btn">Join</a>
+                <?php
+
+             
+                }
+                ?>
+
 
             </div>
 
@@ -203,22 +222,22 @@
                                 <p class="card-text">
                                     <?php echo $wiki->content; ?>
                                 </p>
-                                
+
 
                                 <?php
-                                if($_SESSION["userId"] == $wiki->author_id){
+                                if ($_SESSION["userId"] == $wiki->author_id) {
                                 ?>
 
-                                <form action="wdelete" method="POST">
-                                    <input type="hidden" name="id" value="<?= $wiki->id ?>">
-                                    <button type="submit">delete</button>
-                                </form>
+                                    <form action="wdelete" method="POST">
+                                        <input type="hidden" name="id" value="<?= $wiki->id ?>">
+                                        <button type="submit">delete</button>
+                                    </form>
 
-                                <form action="update" method="GET">*
-                                    <input type="hidden" name="id" value="<?= $wiki->id ?>">
-                                    <button>edit</button>
-                                </form>
-                                <?php 
+                                    <form action="update" method="GET">*
+                                        <input type="hidden" name="id" value="<?= $wiki->id ?>">
+                                        <button>edit</button>
+                                    </form>
+                                <?php
                                 }
                                 ?>
 

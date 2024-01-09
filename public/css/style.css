@@ -402,7 +402,8 @@ form.sign-in-form {
 }
 
 
-body {
+
+/* body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   margin: 0;
@@ -438,4 +439,4 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #0056b3;
-}
+} */

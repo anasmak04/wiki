@@ -23,7 +23,8 @@ $router->setRoutes([
         "tags" => ["TagsController", "index"],
         "users" => ["UserController", "viewAdmin"],
         "users" => ["UserController", "getAllUsers"],
-        "update" => ["WikiController","updateview"]
+        "update" => ["WikiController","updateview"],
+        "logout" => ["UserController","logoutview"],
     ],
 
     'POST' => [
