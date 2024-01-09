@@ -44,7 +44,7 @@ class CategoryImp implements DataRepository
             $id = $Category->getId();
             $query = "UPDATE `category` SET `name` = ? WHERE `id` = ?";
             $statemnt = $this->database->prepare($query);
-            $statemnt->execute([$id, $name]);
+            $statemnt->execute([$name,$id]);
         } catch (PDOException $e) {
             error_log("something went wrong in database : " . $e->getMessage());
         } catch (Exception $e) {

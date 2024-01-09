@@ -23,13 +23,18 @@ $router->setRoutes([
         "tags" => ["TagsController", "index"],
         "users" => ["UserController", "viewAdmin"],
         "users" => ["UserController", "getAllUsers"],
-        "update" => ["WikiController","updateview"],
-        "logout" => ["UserController","logoutview"],
-        "search" => ["SearchController","search"],
-        "wiki" => ["WikiController","search"],
+        "update" => ["WikiController", "updateview"],
+        "logout" => ["UserController", "logoutview"],
+        "search" => ["SearchController", "search"],
+        "wiki" => ["WikiController", "search"],
         "Adminwiki" => ["AdminController", "routewiki"],
         "Adminwiki" => ["AdminController", "findAllWikis"],
-        "editId" => ["AdminController" , "editview"]
+        "editId" => ["AdminController", "editview"],
+        "categories" => ["CategoryController", "view"],
+        "categories" => ["CategoryController", "getAllcategories"],
+        "edit" => ["CategoryController", "edit"],
+        "show" => ["TagsController", "viewtags"],
+        "edittagView" => ["TagsController", "editbyid"]
     ],
 
     'POST' => [
@@ -41,8 +46,12 @@ $router->setRoutes([
         "saveTag" => ["TagsController", "save"],
         "deleteUser" => ["UserController", "deleteUser"],
         "wdelete" => ["WikiController", "deleteWiki"],
-         "wupdate" => ["WikiController", "updateWiki"],
-        "adminupdatewiki" => ["AdminController", "adminupdatewiki"]
+        "wupdate" => ["WikiController", "updateWiki"],
+        "adminupdatewiki" => ["AdminController", "adminupdatewiki"],
+        "deletecategory" => ["CategoryController", "deleteCategory"],
+        "editapp" => ["CategoryController", "editCategory"],
+        "deletetag" => ["TagsController", "deleteTag"],
+        "updatetag" => ["TagsController", "updatetag"]
     ]
 ]);
 

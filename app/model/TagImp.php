@@ -51,11 +51,33 @@ class TagImp implements DataRepository
     }
 
 
-    public function update($entity)
+    public function update($Tag)
     {
+        try {
+
+            $name = $Tag->getName();
+            $id = $Tag->getId();
+            $query = "UPDATE `tag` SET `name` = ? WHERE `id` = ?";
+            $statemnt = $this->database->prepare($query);
+            $statemnt->execute([$name,$id]);
+        } catch (PDOException $e) {
+            error_log("something went wrong in database : " . $e->getMessage());
+        } catch (Exception $e) {
+            error_log("Error : " . $e->getMessage());
+        }
     }
     public function deleteById($id)
     {
+        try {
+
+            $query = "DELETE FROM `tag` WHERE id = ?";
+            $statement = $this->database->prepare($query);
+            $statement->execute([$id]);
+        } catch (PDOException $e) {
+            error_log("something went wrong in database : " . $e->getMessage());
+        } catch (Exception $e) {
+            error_log("Error : " . $e->getMessage());
+        }
     }
     public function findAll()
     {
@@ -73,5 +95,17 @@ class TagImp implements DataRepository
     }
     public function findById($id)
     {
+        try {
+
+            $query = "SELECT * FROM tag WHERE id = ? ";
+            $statement = $this->database->prepare($query);
+            $statement->execute([$id]);
+            $tag = $statement->fetch();
+            return $tag;
+        } catch (PDOException $e) {
+            error_log("something went wrong in database : " . $e->getMessage());
+        } catch (Exception $e) {
+            error_log("Error : " . $e->getMessage());
+        }
     }
 }

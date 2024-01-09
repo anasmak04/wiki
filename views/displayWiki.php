@@ -187,6 +187,8 @@
                 </div>
             </section>
 
+            <a href="index" class="btn">add new wiki</a>
+
 
 
 

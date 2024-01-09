@@ -34,9 +34,49 @@ class TagsController
         require_once "../../views/tags.php";
     }
 
-    public function getAll(){
+    public function getAll()
+    {
         $tags = $this->TagsModel->findAll();
         $categories = $this->CategpryModel->findAll();
         require_once "../../views/index.php";
+    }
+
+    public function deleteTag()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'])) {
+            $id = $_POST["id"];
+            $this->TagsModel->deleteById($id);
+            header("Location: show");
+            exit;
+        }
+    }
+
+    public function editbyid()
+    {
+        $id = $_GET["id"];
+        $tag = $this->TagsModel->findById($id);
+        require_once "../../views/tags/edit.php";
+    }
+
+    public function viewtags()
+    {
+        $tags = $this->TagsModel->findAll();
+        require_once("../../views/tags/show.php");
+    }
+
+
+    public function updatetag()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['editsubmit'])) {
+            $tag = new Tag(null, null);
+
+
+            $tag->setName($_POST["name"]);
+            $this->TagsModel->update($tag);
+
+
+            header("Location: show");
+            exit;
+        }
     }
 }
