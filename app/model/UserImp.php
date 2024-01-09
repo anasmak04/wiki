@@ -25,13 +25,15 @@ class UserImp implements DataRepository, AuthRepository
             $username = $User->getUsername();
             $email = $User->getEmail();
             $password = $User->getPassword();
+            $linkedin = $User->getLinkedin();
+            $github = $User->getGithub();
             $role = 2;
 
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             $query = "INSERT INTO `user`(`name`, `username`, `email`, `password`, `role_id`) VALUES (?,?,?,?,?)";
             $statement = $this->database->prepare($query);
-            $statement->execute([$name, $username, $email, $hashedPassword, $role]);
+            $statement->execute([$name, $username, $email, $hashedPassword , $role]);
             echo "Worked!";
         } catch (PDOException $e) {
             error_log("something went wrong in database : " . $e->getMessage());
@@ -46,11 +48,13 @@ class UserImp implements DataRepository, AuthRepository
             $name = $User->getName();
             $username = $User->getUsername();
             $email = $User->getEmail();
+            $linkedin = $User->getLinkedin();
+            $github = $User->getGithub();
             $id = $User->getId();
 
-            $query = "UPDATE `user` SET `name` = ?, `username` = ?, `email` = ? WHERE id = ?";
+            $query = "UPDATE `user` SET `name` = ?, `username` = ?, `email` = ? , `linkedin` = ? , `github` = ? WHERE id = ?";
             $statement = $this->database->prepare($query);
-            $statement->execute([$name, $username, $email, $id]);
+            $statement->execute([$name, $username, $email, $linkedin , $github , $id]);
         } catch (PDOException $e) {
             error_log("Something went wrong in the database: " . $e->getMessage());
         } catch (Exception $e) {

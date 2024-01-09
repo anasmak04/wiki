@@ -21,6 +21,9 @@ CREATE TABLE user (
     username VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL,
+    image VARCHAR(255),
+    linkedin VARCHAR(80),
+    github VARCHAR(80),
     role_id INT,
     FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE
 );

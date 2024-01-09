@@ -14,6 +14,9 @@
         <div class="forms-container">
             <div class="signin-signup">
                 <form action="register" method="POST" class="form">
+                    <!-- <div class="input-field">
+                        <input type="file" placeholder="Enter your image" name="image" required id="name">
+                    </div> -->
                     <div class="input-field">
                         <input type="text" placeholder="Enter your name" name="name" required id="name">
                     </div>

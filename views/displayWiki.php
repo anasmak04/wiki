@@ -64,6 +64,9 @@
     .logout {
         background-color: red;
     }
+    .profile{
+        background-color: royalblue;
+    }
 </style>
 
 <body>
@@ -104,7 +107,7 @@
                 <?php
                 if ($_SESSION["role"] == 2) { ?>
                     <a href="http://localhost/wiki/logout" class="btn logout">Logout</a>
-                    
+
                 <?php
                 }
                 ?>
@@ -114,7 +117,16 @@
                     <a href="#" class="btn">Join</a>
                 <?php
 
-             
+
+                }
+                ?>
+
+                <?php
+                if ($_SESSION["role"] == 2) { ?>
+                    <a href="http://localhost/wiki/profile" class="btn profile"> view profile</a>
+                <?php
+
+
                 }
                 ?>
 
@@ -661,9 +673,9 @@
 
             <section class="section newsletter">
 
-                <h2 class="h2 section-title">
-                    Subscribe to <strong class="strong">new posts</strong>
-                </h2>
+                <h5 class="h2 section-title">
+                    Subscribe to new posts
+                </h5>
 
                 <form action="" class="newsletter-form">
                     <input type="email" name="email_address" placeholder="Your email address" required class="email-field">
