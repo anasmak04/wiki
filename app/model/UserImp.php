@@ -25,15 +25,16 @@ class UserImp implements DataRepository, AuthRepository
             $username = $User->getUsername();
             $email = $User->getEmail();
             $password = $User->getPassword();
+            $image = $User->getImage();
             $linkedin = $User->getLinkedin();
             $github = $User->getGithub();
             $role = 2;
 
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            $query = "INSERT INTO `user`(`name`, `username`, `email`, `password`, `role_id`) VALUES (?,?,?,?,?)";
+            $query = "INSERT INTO `user`(`name`, `username`, `email`, `password`, `image` , `role_id`) VALUES (?,?,?,?,?,?)";
             $statement = $this->database->prepare($query);
-            $statement->execute([$name, $username, $email, $hashedPassword , $role]);
+            $statement->execute([$name, $username, $email, $hashedPassword , $image , $role]);
             echo "Worked!";
         } catch (PDOException $e) {
             error_log("something went wrong in database : " . $e->getMessage());
@@ -116,7 +117,7 @@ class UserImp implements DataRepository, AuthRepository
             $email = $User->getEmail();
             $password = $User->getPassword();
 
-            $query = "SELECT u.id AS id_user, u.name AS userName, u.email AS userEmail , r.id AS roleId FROM user u INNER JOIN role r ON u.role_id = r.id WHERE u.email = ?";
+            $query = "SELECT u.id AS id_user, u.name AS userName, u.image AS imagep , u.email AS userEmail , r.id AS roleId FROM user u INNER JOIN role r ON u.role_id = r.id WHERE u.email = ?";
             $statement = $this->database->prepare($query);
             $statement->execute([$email]);
             $user = $statement->fetch();
@@ -124,6 +125,7 @@ class UserImp implements DataRepository, AuthRepository
             $_SESSION["role"] = $user->roleId;
             $_SESSION["userId"] = $user->id_user;
             $_SESSION["username"] = $user->userName;
+            $_SESSION["image"] = $user->imagep;
 
             if ($user && password_verify($password, $user->hashedPassword)) {
                 if ($_SESSION["role"] == 2) {

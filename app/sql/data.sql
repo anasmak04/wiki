@@ -47,6 +47,7 @@ CREATE TABLE wiki (
     title VARCHAR(255),
     content VARCHAR(500),
     image VARCHAR(255),
+    status int,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     author_id INT,
     FOREIGN KEY (author_id) REFERENCES user(id) ON DELETE CASCADE,

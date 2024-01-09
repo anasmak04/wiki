@@ -1,47 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Wikis</title>
-    <link rel="stylesheet" href="/wiki/public/css/wiki.css">
-</head>
-
-<body>
-    <div class="container">
-        <?php
-
-        // use App\model\CategoryImp;
-        // use App\model\UserImp;
-
-
-        foreach ($wikis as $wiki) : ?>
-            <div class="card">
-                <p>ID Wiki: <?= $wiki->id ?></p>
-                <img src="<?= $wiki->image ?>" alt="Image">
-                <p>Title: <?= $wiki->title ?></p>
-                <p>Content: <?= $wiki->content ?></p>
-                <p>Time: <?= $wiki->created_at ?></p>
-                <p>id user: <?= $wiki->author_id ?></p>
-                <p>name user: <?= $wiki->Author ?></p>
-                <p>name category: <?= $wiki->categoryName ?></p>
-            </div>
-        <?php endforeach; ?>
-    </div>
-</body>
-
-</html> -->
-
-<!-- <?php
-        //$model = new UserImp();
-        //$model2 = new CategoryImp();
-        //$user = $model->findById($wiki->author_id);
-        //category = $model2->findById($wiki->category_id);
-        ?>
-                <p>user : <?= $user->name; ?></p>
-                <p>category : <?= $category->name; ?></p> -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,8 +20,58 @@
     .logout {
         background-color: red;
     }
-    .profile{
+
+    .profile {
         background-color: royalblue;
+    }
+
+    /* Basic styling for the avatar image */
+    .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    /* Dropdown menu */
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 8px 0;
+        z-index: 1;
+        border-radius: 4px;
+        list-style: none;
+        margin: 0;
+    }
+
+    /* Show dropdown menu on avatar hover */
+    .avatar-dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+    /* Style for dropdown menu items */
+    .dropdown-menu li {
+        padding: 8px 16px;
+    }
+
+    /* Style for dropdown links */
+    .dropdown-menu li a {
+        text-decoration: none;
+        color: #333;
+        display: block;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Hover effect for dropdown links */
+    .dropdown-menu li a:hover {
+        background-color: #f0f0f0;
+    }
+
+    .container2 {
+        position: relative;
+        right: 30px;
     }
 </style>
 
@@ -74,7 +80,7 @@
 
 
     <header class="header section" data-header>
-        <div class="container">
+        <div class="container container2">
 
             <a href="#" class="logo">
                 <img src="/wiki/public/assets/logo.svg" width="129" height="40" alt="Blogy logo">
@@ -104,33 +110,36 @@
                     <span class="span three"></span>
                 </button>
 
-                <?php
-                if ($_SESSION["role"] == 2) { ?>
-                    <a href="http://localhost/wiki/logout" class="btn logout">Logout</a>
 
-                <?php
-                }
-                ?>
 
                 <?php
                 if ($_SESSION["role"] !== 2) { ?>
                     <a href="#" class="btn">Join</a>
                 <?php
-
-
                 }
                 ?>
+
 
                 <?php
                 if ($_SESSION["role"] == 2) { ?>
-                    <a href="http://localhost/wiki/profile" class="btn profile"> view profile</a>
-                <?php
+                    <div class="avatar-dropdown">
+                        <img style="width:50px;" src="<?php echo $_SESSION["image"]; ?>" alt="" class="avatar">
+                        <ul class="dropdown-menu">
+                            <li> <a href="http://localhost/wiki/profile"> view profile</a>
+                            </li>
 
-
-                }
-                ?>
-
-
+                            <?php
+                            if ($_SESSION["role"] !== 2) { ?>
+                                <li><a href="#" class="">Join</a></li>
+                            <?php
+                            }
+                            ?>
+                            <li> <a href="http://localhost/wiki/logout" class="">Logout</a>
+                            </li>
+                        </ul>
+                    </div> <?php
+                        }
+                            ?>
             </div>
 
         </div>
@@ -182,7 +191,8 @@
 
 
 
-
+            <input type="text" id="searchInput" placeholder="Search announcements..." />
+            <div id="searchResults"></div>
 
             <section class="section featured" aria-label="featured post">
                 <div class="container container1">
@@ -245,7 +255,7 @@
                                         <button type="submit">delete</button>
                                     </form>
 
-                                    <form action="update" method="GET">*
+                                    <form action="update" method="GET">
                                         <input type="hidden" name="id" value="<?= $wiki->id ?>">
                                         <button>edit</button>
                                     </form>
@@ -667,9 +677,7 @@
 
 
 
-            <!-- 
-        - #NEWSLETTER
-      -->
+
 
             <section class="section newsletter">
 
@@ -841,7 +849,22 @@
 
         </div>
     </footer>
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', async function(e) {
+            try {
+                const query = e.target.value;
+                const response = await fetch('/search?q=' + encodeURIComponent(query));
 
+                if (response.ok) {
+                    const data = await response.text();
+                    console.log(data);
+                    document.getElementById('searchResults').innerHTML = data;
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        });
+    </script>
 
 
     <script src="/wiki/public/js/script.js" defer></script>
@@ -851,4 +874,4 @@
 
 </body>
 
-</html> -->
+</html>

@@ -13,10 +13,8 @@
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
-                <form action="register" method="POST" class="form">
-                    <!-- <div class="input-field">
-                        <input type="file" placeholder="Enter your image" name="image" required id="name">
-                    </div> -->
+                <form action="register" method="POST" class="form" enctype="multipart/form-data">
+                   
                     <div class="input-field">
                         <input type="text" placeholder="Enter your name" name="name" required id="name">
                     </div>
@@ -31,6 +29,10 @@
                     <span class="" id="emailError">email is not valid</span>
                     <div class="input-field">
                         <input type="password" placeholder="Enter your password" name="password" required id="password">
+                    </div>
+
+                     <div class="input-field">
+                        <input type="file" placeholder="Enter your image" name="image" required id="name">
                     </div>
                     <button type="submit" name="submitRegister" class="btn">register</button>
                 </form>

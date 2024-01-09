@@ -22,12 +22,20 @@ class UserController
             $username = $_POST["username"];
             $email = $_POST["email"];
             $password = $_POST["password"];
+            $uploadDir = '../../public/uploads/';
+            $uploadFile = $uploadDir . basename($_FILES['image']['name']);
 
-            $user = new User(null, $name, $username, $email, $password, null, null, null, null);
-            $this->userModel->save($user);
-
-            header("Location: http://localhost/wiki/login");
-            exit;
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+                $imagePath = "/wiki/public/uploads/" . $_FILES['image']['name'];
+                session_start();
+                $_SESSION['temp_image_path'] = $imagePath;
+                $user = new User(null, $name, $username, $email, $password, $imagePath, null, null, null);
+                $this->userModel->save($user);
+                header("Location: http://localhost/wiki/login");
+                exit;
+            } else {
+                echo "no images";
+            }
         }
     }
 

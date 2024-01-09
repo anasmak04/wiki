@@ -8,6 +8,7 @@ class Wiki
     private $title;
     private $content;
     private $image;
+    private $status;
     private $created_at;
     private $author_id;
     private $category_id;
@@ -21,12 +22,13 @@ class Wiki
      * @param $author_id
      */
 
-    public function __construct($id, $title, $content, $image, $created_at, $author_id, $category_id)
+    public function __construct($id, $title, $content, $image, $status , $created_at, $author_id, $category_id)
     {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
         $this->image = $image;
+        $this->status = $status;
         $this->created_at = $created_at;
         $this->author_id = $author_id;
         $this->category_id = $category_id;
@@ -79,6 +81,23 @@ class Wiki
     {
         $this->content = $content;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
 
     /**
      * @return mixed

@@ -18,6 +18,7 @@ class WikiController
         $this->wikiModel = new WikiImp();
     }
 
+
     public function save()
     {
         try {
@@ -31,7 +32,7 @@ class WikiController
 
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
                     $imagePath = "/wiki/public/uploads/" . $_FILES['image']['name'];
-                    $wiki = new Wiki(null, $title, $content, $imagePath, null, null, $categoryId);
+                    $wiki = new Wiki(null, $title, $content, $imagePath, null, null, null, $categoryId);
                     $this->wikiModel->save($wiki);
                     header("Location: displayWiki");
                     exit;
@@ -45,6 +46,7 @@ class WikiController
     }
 
 
+
     public function findAllWikis()
     {
         $wikis = $this->wikiModel->findAll();
@@ -56,14 +58,18 @@ class WikiController
     }
 
 
+
+
+
+
     public function deleteWiki()
     {
-        
+
         if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'])) {
             $wikiId = $_POST['id'];
             $userId = $_SESSION["userId"];
 
-           
+
             $this->wikiModel->deleteById2($wikiId, $userId);
             header("Location: displayWiki");
             exit;
@@ -71,8 +77,9 @@ class WikiController
     }
 
 
-    public function updateWiki(){
-          
+    public function updateWiki()
+    {
+
         if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'])) {
             $wikiId = $_POST['id'];
             $userId = $_SESSION["userId"];
@@ -81,14 +88,15 @@ class WikiController
             exit;
         }
     }
-    
 
-    public function updateview() {
+
+    public function updateview()
+    {
         $id = $_GET["id"];
         $wiki = $this->wikiModel->findById($id);
         require_once "../../views/updateview.php";
     }
-    
+
 
 
     // public function findByIdUser(){
@@ -107,10 +115,6 @@ class WikiController
 
     public function wiki()
     {
-
         require_once("../../views/displayWiki.php");
     }
-
-
-    
 }

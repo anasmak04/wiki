@@ -42,6 +42,7 @@
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="#section1">Dashboard</a></li>
                     <li><a href="category">Category</a></li>
+                    <li><a href="Adminwiki">wiki</a></li>
                     <li><a href="tags">tags</a></li>
                     <li><a href="users">users</a></li>
                 </ul><br>
@@ -82,7 +83,7 @@
                 <div class="row">
                     <div class="col-sm-10">
                         <div class="well">
-                        <div style="width: 800px;">
+                            <div style="width: 800px;">
                                 <canvas id="myChart"></canvas>
                             </div>
                         </div>
@@ -105,7 +106,7 @@
         </div>
     </div>
 
-    
+
 
     <?php
 

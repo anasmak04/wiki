@@ -5,6 +5,7 @@ namespace App\model;
 use App\dao\DataRepository;
 use App\config\Dbconfig;
 use App\entity\Tag;
+use App\entity\Wiki;
 use Exception;
 use PDOException;
 
@@ -20,6 +21,9 @@ class WikiImp implements DataRepository
         $this->database = Dbconfig::getInstance()->getConnection();
     }
 
+
+
+
     public function save($wiki)
     {
         $currentTimestamp = date('Y-m-d H:i:s');
@@ -28,14 +32,15 @@ class WikiImp implements DataRepository
             $content = $wiki->getContent();
             $image = $wiki->getImage();
             $date = $currentTimestamp;
+            $status = 0;
             $authorId = $_SESSION["userId"];
             $categoryId = $wiki->getCategoryId();
 
             if (!empty($title) && !empty($content) && !empty($date) && !empty($authorId) && !empty($categoryId)) {
 
-                $query = "INSERT INTO `wiki`(`title`, `content`, `image`, `created_at`, `author_id`, `category_id`) VALUES (?,?,?,?,?,?)";
+                $query = "INSERT INTO `wiki`(`title`, `content`, `image`, `status` ,`created_at`, `author_id`, `category_id`) VALUES (?,?,?,?,?,?,?)";
                 $statement = $this->database->prepare($query);
-                $statement->execute([$title, $content, $image, $date, $authorId, $categoryId]);
+                $statement->execute([$title, $content, $image, $status, $date, $authorId, $categoryId]);
 
                 $wikiId = $this->database->lastInsertId();
 
@@ -53,6 +58,8 @@ class WikiImp implements DataRepository
             error_log("Error: " . $e->getMessage());
         }
     }
+
+
 
     public function update($Wiki)
     {
@@ -92,7 +99,7 @@ class WikiImp implements DataRepository
     public function findAll()
     {
         try {
-            $query = "SELECT w.* , u.name AS Author, c.name AS categoryName FROM wiki w LEFT JOIN user u ON w.author_id = u.id LEFT JOIN category c ON w.category_id = c.id";
+            $query = "SELECT w.* , u.name AS Author, c.name AS categoryName FROM wiki w LEFT JOIN user u ON w.author_id = u.id LEFT JOIN category c ON w.category_id = c.id WHERE status = 1";
 
             $statement = $this->database->prepare($query);
             $statement->execute();
@@ -133,25 +140,41 @@ class WikiImp implements DataRepository
         }
     }
 
+    
+    public function update3($Wiki){
+        try{
+            $id = $Wiki->getId();
+            $status = $Wiki->getStatus();
+            $query = "UPDATE wiki SET status = ? WHERE id = ?";
+            $statement = $this->database->prepare($query);
+            $statement->execute([$status, $id]);
+        }
+        catch (PDOException $e) {
+            error_log("Something went wrong in the database: " . $e->getMessage());
+        } catch (Exception $e) {
+            error_log("Error: " . $e->getMessage());
+        }
+    }
+    
 
-                public function update2($Wiki, $id)
-                {
-                    try {
-                        $id = $Wiki->getId();
-                        $title = $Wiki->getTitle();
-                        $content = $Wiki->getContent();
-                        $image = $Wiki->getImage();
-                        $authorId = $Wiki->getAuthorId();
-                        $categoryId = $Wiki->getCategoryId();
+    public function update2($Wiki, $id)
+    {
+        try {
+            $id = $Wiki->getId();
+            $title = $Wiki->getTitle();
+            $content = $Wiki->getContent();
+            $image = $Wiki->getImage();
+            $authorId = $Wiki->getAuthorId();
+            $categoryId = $Wiki->getCategoryId();
 
-                        $query = "UPDATE `wiki` SET `title` = ?, `content` = ?, `image` = ?, `author_id` = ?, `category_id` = ? WHERE `id` = ? AND author_id = ?";
-                        $statement = $this->database->prepare($query);
+            $query = "UPDATE `wiki` SET `title` = ?, `content` = ?, `image` = ?, `author_id` = ?, `category_id` = ? WHERE `id` = ? AND author_id = ?";
+            $statement = $this->database->prepare($query);
 
-                        $statement->execute([$title, $content, $image, $authorId, $categoryId, $id]);
-                    } catch (PDOException $e) {
-                        error_log("Something went wrong in the database: " . $e->getMessage());
-                    } catch (Exception $e) {
-                        error_log("Error: " . $e->getMessage());
-                    }
-                }
+            $statement->execute([$title, $content, $image, $authorId, $categoryId, $id]);
+        } catch (PDOException $e) {
+            error_log("Something went wrong in the database: " . $e->getMessage());
+        } catch (Exception $e) {
+            error_log("Error: " . $e->getMessage());
+        }
+    }
 }

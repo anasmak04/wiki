@@ -25,6 +25,11 @@ $router->setRoutes([
         "users" => ["UserController", "getAllUsers"],
         "update" => ["WikiController","updateview"],
         "logout" => ["UserController","logoutview"],
+        "search" => ["SearchController","search"],
+        "wiki" => ["WikiController","search"],
+        "Adminwiki" => ["AdminController", "routewiki"],
+        "Adminwiki" => ["AdminController", "findAllWikis"],
+        "editId" => ["AdminController" , "editview"]
     ],
 
     'POST' => [
@@ -37,7 +42,7 @@ $router->setRoutes([
         "deleteUser" => ["UserController", "deleteUser"],
         "wdelete" => ["WikiController", "deleteWiki"],
          "wupdate" => ["WikiController", "updateWiki"],
-        
+        "adminupdatewiki" => ["AdminController", "adminupdatewiki"]
     ]
 ]);
 
