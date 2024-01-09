@@ -134,24 +134,24 @@ class WikiImp implements DataRepository
     }
 
 
-    public function update2($Wiki, $userId)
-    {
-        try {
-            $id = $Wiki->getId();
-            $title = $Wiki->getTitle();
-            $content = $Wiki->getContent();
-            $image = $Wiki->getImage();
-            $authorId = $Wiki->getAuthorId();
-            $categoryId = $Wiki->getCategoryId();
+                public function update2($Wiki, $id)
+                {
+                    try {
+                        $id = $Wiki->getId();
+                        $title = $Wiki->getTitle();
+                        $content = $Wiki->getContent();
+                        $image = $Wiki->getImage();
+                        $authorId = $Wiki->getAuthorId();
+                        $categoryId = $Wiki->getCategoryId();
 
-            $query = "UPDATE `wiki` SET `title` = ?, `content` = ?, `image` = ?, `author_id` = ?, `category_id` = ? WHERE `id` = ? AND author_id = ?";
-            $statement = $this->database->prepare($query);
+                        $query = "UPDATE `wiki` SET `title` = ?, `content` = ?, `image` = ?, `author_id` = ?, `category_id` = ? WHERE `id` = ? AND author_id = ?";
+                        $statement = $this->database->prepare($query);
 
-            $statement->execute([$title, $content, $image, $authorId, $categoryId, $id]);
-        } catch (PDOException $e) {
-            error_log("Something went wrong in the database: " . $e->getMessage());
-        } catch (Exception $e) {
-            error_log("Error: " . $e->getMessage());
-        }
-    }
+                        $statement->execute([$title, $content, $image, $authorId, $categoryId, $id]);
+                    } catch (PDOException $e) {
+                        error_log("Something went wrong in the database: " . $e->getMessage());
+                    } catch (Exception $e) {
+                        error_log("Error: " . $e->getMessage());
+                    }
+                }
 }

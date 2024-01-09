@@ -10,15 +10,10 @@
 </head>
 
 <body>
-
-
-    <?php if ($wiki) : 
-        
-        
-        ?>
+    <?php if ($wiki) :
+    ?>
         <form action="wupdate" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?= $wiki->id; ?>">
-
             <fieldset>
                 <legend>wiki Information</legend>
 

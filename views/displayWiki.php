@@ -203,7 +203,11 @@
                                 <p class="card-text">
                                     <?php echo $wiki->content; ?>
                                 </p>
+                                
 
+                                <?php
+                                if($_SESSION["userId"] == $wiki->author_id){
+                                ?>
 
                                 <form action="wdelete" method="POST">
                                     <input type="hidden" name="id" value="<?= $wiki->id ?>">
@@ -214,6 +218,10 @@
                                     <input type="hidden" name="id" value="<?= $wiki->id ?>">
                                     <button>edit</button>
                                 </form>
+                                <?php 
+                                }
+                                ?>
+
 
 
 
