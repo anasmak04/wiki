@@ -64,7 +64,7 @@ class UserImp implements DataRepository, AuthRepository
     }
 
 
- 
+
 
 
     public function deleteById($id)
@@ -128,11 +128,12 @@ class UserImp implements DataRepository, AuthRepository
             $statement->execute([$email]);
             $user = $statement->fetch();
             session_start();
-            $_SESSION["role"] = $user->roleId;
-            $_SESSION["userId"] = $user->id_user;
-            $_SESSION["username"] = $user->userName;
-            $_SESSION["image"] = $user->imagep;
+
             if ($user) {
+                $_SESSION["role"] = $user->roleId;
+                $_SESSION["userId"] = $user->id_user;
+                $_SESSION["username"] = $user->userName;
+                $_SESSION["image"] = $user->imagep;
                 if (password_verify($password, $user->password)) {
 
 

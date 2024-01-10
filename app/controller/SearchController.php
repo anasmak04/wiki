@@ -13,19 +13,25 @@ class SearchController
         $this->database = Dbconfig::getInstance()->getConnection();
     }
 
-
-
     public function search()
     {
         if (isset($_GET['q'])) {
             $query = $_GET['q'];
-            $stmt = $this->database->prepare("SELECT * FROM annnouce WHERE title LIKE ?");
+            $stmt = $this->database->prepare("SELECT title, content FROM `wiki` WHERE title LIKE ?");
             $stmt->execute(["%$query%"]);
             $results = $stmt->fetchAll();
 
+            $data = [];
             foreach ($results as $row) {
-                echo "$row->title";
+                $data[] = [
+                    'title' => $row->title,
+                    'content' => $row->content
+                ];
             }
+
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
         }
     }
 }

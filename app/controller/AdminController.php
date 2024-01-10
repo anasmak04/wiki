@@ -41,11 +41,8 @@ class AdminController
     public function findAllWikis()
     {
         $wikis = $this->wikiModel->findAll2();
-        if (!empty($wikis)) {
             require_once "../../views/admin/wikiAdmin.php";
-        } else {
-            echo "wikis not found.";
-        }
+        
     }
 
     public function routewiki()
@@ -70,7 +67,7 @@ class AdminController
             $wiki->setId($_POST['id']);
             $wiki->setStatus($_POST["status"]);
             $this->wikiModel->update3($wiki);
-            header("Location: dashbord");
+            header("Location: dashboard");
             exit;
         }
     }

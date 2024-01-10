@@ -36,9 +36,7 @@ class WikiController
                     $this->wikiModel->save($wiki);
                     header("Location: displayWiki");
                     exit;
-                } else {
-                    echo "Image upload failed";
-                }
+                } 
             }
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
@@ -50,11 +48,8 @@ class WikiController
     public function findAllWikis()
     {
         $wikis = $this->wikiModel->findAll();
-        if (!empty($wikis)) {
-            require_once  "../../views/wiki/displayWiki.php";
-        } else {
-            echo "wikis not found.";
-        }
+       
+        require_once  "../../views/wiki/displayWiki.php";
     }
 
 

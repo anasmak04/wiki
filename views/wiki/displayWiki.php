@@ -10,70 +10,11 @@
     <meta name="description" content="This is a blog html template made by codewithsadee">
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="/wiki/public/css/home.css">
+    <link rel="stylesheet" href="/wiki/public/css/style3.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
-
 </head>
-
-<style>
-    .logout {
-        background-color: red;
-    }
-
-    .profile {
-        background-color: royalblue;
-    }
-
-    /* Basic styling for the avatar image */
-    .avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        cursor: pointer;
-    }
-
-    /* Dropdown menu */
-    .dropdown-menu {
-        display: none;
-        position: absolute;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        padding: 8px 0;
-        z-index: 1;
-        border-radius: 4px;
-        list-style: none;
-        margin: 0;
-    }
-
-    /* Show dropdown menu on avatar hover */
-    .avatar-dropdown:hover .dropdown-menu {
-        display: block;
-    }
-
-    /* Style for dropdown menu items */
-    .dropdown-menu li {
-        padding: 8px 16px;
-    }
-
-    /* Style for dropdown links */
-    .dropdown-menu li a {
-        text-decoration: none;
-        color: #333;
-        display: block;
-        transition: background-color 0.3s ease;
-    }
-
-    /* Hover effect for dropdown links */
-    .dropdown-menu li a:hover {
-        background-color: #f0f0f0;
-    }
-
-    .container2 {
-        position: relative;
-        right: 30px;
-    }
-</style>
 
 <body>
 
@@ -140,7 +81,6 @@
     </header>
 
 
-
     <div class="search-bar" data-search-bar>
 
         <div class="input-wrapper">
@@ -159,9 +99,6 @@
     <div class="overlay" data-overlay data-search-toggler></div>
 
 
-
-
-
     <main>
         <article>
 
@@ -169,27 +106,20 @@
                 <div class="container">
 
                     <h1 class="h1 hero-title">
+
                         👋Welcome back <?= $_SESSION["username"]; ?> !
                     </h1>
-
-
-
                 </div>
             </section>
 
-            <a href="index" class="">add new wiki</a>
 
+            <a href="index" class="add-wiki-link">Add New Wiki</a>
 
-
-
-
-            <div style="text-align:center;">
-                <input type="text" id="searchInput" placeholder="Search announcements..." />
-                <div id="searchResults">
-
-
-                </div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for a wiki..." />
+                <div id="searchResults"></div>
             </div>
+
 
             <section class="section featured" aria-label="featured post">
                 <div class="container container1">
@@ -269,6 +199,8 @@
                                         <input type="hidden" name="id" value="<?= $wiki->id ?>">
                                         <button>edit</button>
                                     </form>
+
+
                                 <?php
                                 }
                                 ?>
@@ -281,412 +213,6 @@
                     <?php endforeach; ?>
                 </div>
             </section>
-
-
-            <!-- 
-        - #RECENT POST
-      -->
-            <!-- 
-            <section class="section recent" aria-label="recent post">
-                <div class="container">
-
-                    <div class="title-wrapper">
-
-                        <h2 class="h2 section-title">
-                            See what we’ve <strong class="strong">written lately</strong>
-                        </h2>
-
-                        <div class="top-author">
-                            <ul class="avatar-list">
-
-                                <li class="avatar-item">
-                                    <a href="#" class="avatar large img-holder" style="--width: 100; --height: 100;">
-                                        <img src="/wiki/public/assets/author-1.jpg" width="100" height="100" alt="top author" class="img-cover">
-                                    </a>
-                                </li>
-
-                                <li class="avatar-item">
-                                    <a href="#" class="avatar large img-holder" style="--width: 100; --height: 100;">
-                                        <img src="/wiki/public/assets/author-2.jpg" width="100" height="100" alt="top author" class="img-cover">
-                                    </a>
-                                </li>
-
-                                <li class="avatar-item">
-                                    <a href="#" class="avatar large img-holder" style="--width: 100; --height: 100;">
-                                        <img src="/wiki/public/assets/author-3.jpg" width="100" height="100" alt="top author" class="img-cover">
-                                    </a>
-                                </li>
-
-                                <li class="avatar-item">
-                                    <a href="#" class="avatar large img-holder" style="--width: 100; --height: 100;">
-                                        <img src="/wiki/public/assets/author-4.jpg" width="100" height="100" alt="top author" class="img-cover">
-                                    </a>
-                                </li>
-
-                                <li class="avatar-item">
-                                    <a href="#" class="avatar large img-holder" style="--width: 100; --height: 100;">
-                                        <img src="/wiki/public/assets/author-5.jpg" width="100" height="100" alt="top author" class="img-cover">
-                                    </a>
-                                </li>
-
-                            </ul>
-
-                            <span class="span">Meet our top authors</span>
-                        </div>
-
-                    </div>
-
-                    <ul class="grid-list">
-
-                        <li>
-                            <div class="blog-card">
-
-                                <figure class="card-banner img-holder" style="--width: 550; --height: 660;">
-                                    <img src="/wiki/public/assets/recent-1.jpg" width="550" height="660" loading="lazy" alt="Creating is a privilege but it’s also a gift" class="img-cover">
-
-                                    <ul class="avatar-list absolute">
-
-                                        <li class="avatar-item">
-                                            <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
-                                                <img src="/wiki/public/assets/author-3.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
-                                            </a>
-                                        </li>
-
-                                        <li class="avatar-item">
-                                            <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
-                                                <img src=/wiki/public/assets/author-5.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </figure>
-
-                                <div class="card-content">
-
-                                    <ul class="card-meta-list">
-
-                                        <li>
-                                            <a href="#" class="card-tag">Lifestyle</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#" class="card-tag">People</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#" class="card-tag">Review</a>
-                                        </li>
-
-                                    </ul>
-
-                                    <h3 class="h4">
-                                        <a href="#" class="card-title hover:underline">
-                                            Creating is a privilege but it’s also a gift
-                                        </a>
-                                    </h3>
-
-                                    <p class="card-text">
-                                        Nullam vel lectus vel velit pellentesque dignissim nec id magna. Cras molestie ornare quam at
-                                        semper. Proin a ipsum ex.
-                                        Curabitur eu venenatis justo. Nullam felis augue, imperdiet at sodales a, sollicitudin nec risus.
-                                    </p>
-
-                                </div>
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="blog-card">
-
-                                <figure class="card-banner img-holder" style="--width: 550; --height: 660;">
-                                    <img src="/wiki/public/assets/recent-2.jpg" width="550" height="660" loading="lazy" alt="Being unique is better than being perfect" class="img-cover">
-
-                                    <ul class="avatar-list absolute">
-
-                                        <li class="avatar-item">
-                                            <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
-                                                <img src="/wiki/public/assets/author-5.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </figure>
-
-                                <div class="card-content">
-
-                                    <ul class="card-meta-list">
-
-                                        <li>
-                                            <a href="#" class="card-tag">Design</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#" class="card-tag">Product</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#" class="card-tag">Idea</a>
-                                        </li>
-
-                                    </ul>
-
-                                    <h3 class="h4">
-                                        <a href="#" class="card-title hover:underline">
-                                            Being unique is better than being perfect
-                                        </a>
-                                    </h3>
-
-                                    <p class="card-text">
-                                        Nam in pretium dui. Phasellus dapibus, mi at molestie cursus, neque eros aliquet nisi, non
-                                        efficitur nisi est nec mi.
-                                        Nullam semper, ligula a luctus ornare, leo turpis fermentum lectus, quis volutpat urna orci a
-                                        lectus. Duis et odio
-                                        lobortis, auctor justo ut, egestas magna.
-                                    </p>
-
-                                </div>
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="blog-card">
-
-                                <figure class="card-banner img-holder" style="--width: 550; --height: 660;">
-                                    <img src="/wiki/public/assets/recent-3.jpg" width="550" height="660" loading="lazy" alt="Now we’re getting somewhere" class="img-cover">
-
-                                    <ul class="avatar-list absolute">
-
-                                        <li class="avatar-item">
-                                            <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
-                                                <img src="/wiki/public/assets/author-2.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
-                                            </a>
-                                        </li>
-
-                                        <li class="avatar-item">
-                                            <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
-                                                <img src="/wiki/public/assets/author-5.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
-                                            </a>
-                                        </li>
-
-                                        <li class="avatar-item">
-                                            <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
-                                                <img src="/wiki/public/assets/author-1.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </figure>
-
-                                <div class="card-content">
-
-                                    <ul class="card-meta-list">
-
-                                        <li>
-                                            <a href="#" class="card-tag">Idea</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#" class="card-tag">Product</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#" class="card-tag">Review</a>
-                                        </li>
-
-                                    </ul>
-
-                                    <h3 class="h4">
-                                        <a href="#" class="card-title hover:underline">
-                                            Now we’re getting somewhere
-                                        </a>
-                                    </h3>
-
-                                    <p class="card-text">
-                                        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec
-                                        volutpat rhoncus quam,
-                                        a feugiat elit gravida eget. Curabitur id pharetra ligula. Integer porttitor suscipit ante ac
-                                        faucibus. Sed a enim non
-                                        enim viverra pulvinar vel diam ut lorem congue feugiat.
-                                    </p>
-
-                                </div>
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="blog-card">
-
-                                <figure class="card-banner img-holder" style="--width: 550; --height: 660;">
-                                    <img src="/wiki/public/assets/recent-4.jpg" width="550" height="660" loading="lazy" alt="The trick to getting more done is to have the freedom to roam around" class="img-cover">
-
-                                    <ul class="avatar-list absolute">
-
-                                        <li class="avatar-item">
-                                            <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
-                                                <img src="/wiki/public/assets/author-3.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </figure>
-
-                                <div class="card-content">
-
-                                    <ul class="card-meta-list">
-
-                                        <li>
-                                            <a href="#" class="card-tag">Lifestyle</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#" class="card-tag">Design</a>
-                                        </li>
-
-                                    </ul>
-
-                                    <h3 class="h4">
-                                        <a href="#" class="card-title hover:underline">
-                                            The trick to getting more done is to have the freedom to roam around
-                                        </a>
-                                    </h3>
-
-                                    <p class="card-text">
-                                        Integer nec mi cursus, blandit est et, auctor mauris. Aenean ex metus, faucibus in mattis at,
-                                        tincidunt eu dolor. Cras
-                                        hendrerit massa nec augue placerat rutrum. Sed facilisis massa enim, ac tempus diam elementum sit
-                                        amet.
-                                    </p>
-
-                                </div>
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="blog-card">
-
-                                <figure class="card-banner img-holder" style="--width: 550; --height: 660;">
-                                    <img src="/wiki/public/assets/recent-5.jpg" width="550" height="660" loading="lazy" alt="Every day, in every city and town across the country" class="img-cover">
-
-                                    <ul class="avatar-list absolute">
-
-                                        <li class="avatar-item">
-                                            <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
-                                                <img src="/wiki/public/assets/author-1.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
-                                            </a>
-                                        </li>
-
-                                        <li class="avatar-item">
-                                            <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
-                                                <img src="/wiki/public/assets/author-6.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </figure>
-
-                                <div class="card-content">
-
-                                    <ul class="card-meta-list">
-
-                                        <li>
-                                            <a href="#" class="card-tag">People</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#" class="card-tag">Story</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#" class="card-tag">Lifestyle</a>
-                                        </li>
-
-                                    </ul>
-
-                                    <h3 class="h4">
-                                        <a href="#" class="card-title hover:underline">
-                                            Every day, in every city and town across the country
-                                        </a>
-                                    </h3>
-
-                                    <p class="card-text">
-                                        Morbi a facilisis lectus. Ut eu dapibus risus, a interdum justo. Vestibulum volutpat velit ac
-                                        tellus mollis, sit amet
-                                        sodales metus elementum. Aliquam eu mi massa. Proin suscipit enim a pulvinar viverra.
-                                    </p>
-
-                                </div>
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="blog-card">
-
-                                <figure class="card-banner img-holder" style="--width: 550; --height: 660;">
-                                    <img src="/wiki/public/assets/recent-6.jpg" width="550" height="660" loading="lazy" alt="Your voice, your mind, your story, your vision" class="img-cover">
-
-                                    <ul class="avatar-list absolute">
-
-                                        <li class="avatar-item">
-                                            <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
-                                                <img src="/wiki/public/assets/author-6.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </figure>
-
-                                <div class="card-content">
-
-                                    <ul class="card-meta-list">
-
-                                        <li>
-                                            <a href="#" class="card-tag">People</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#" class="card-tag">Review</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#" class="card-tag">Story</a>
-                                        </li>
-
-                                    </ul>
-
-                                    <h3 class="h4">
-                                        <a href="#" class="card-title hover:underline">
-                                            Your voice, your mind, your story, your vision
-                                        </a>
-                                    </h3>
-
-                                    <p class="card-text">
-                                        Nullam auctor nisi non tortor porta, id dapibus lectus rhoncus. Vivamus lobortis posuere enim
-                                        finibus sodales. Phasellus
-                                        quis tellus scelerisque, sagittis tortor et, maximus metus.
-                                    </p>
-
-                                </div>
-
-                            </div>
-                        </li>
-
-                    </ul>
-                </div>
-            </section> -->
-
-
-
-
-
-
-
-
-
 
 
             <section class="section newsletter">
@@ -705,14 +231,6 @@
 
         </article>
     </main>
-
-
-
-
-
-    <!-- 
-    - #FOOTER
-  -->
 
     <footer class="footer">
         <div class="container">
@@ -859,26 +377,10 @@
 
         </div>
     </footer>
-    <script>
-        document.getElementById('searchInput').addEventListener('keyup', async function(e) {
-            try {
-                const query = e.target.value;
-                const response = await fetch('/search?q=' + encodeURIComponent(query));
-
-                if (response.ok) {
-                    const data = await response.text();
-                    console.log(data);
-                    document.getElementById('searchResults').innerHTML = data;
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        });
-    </script>
 
 
     <script src="/wiki/public/js/script.js" defer></script>
-
+    <script src="/wiki/public/js/search.js" defer></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 

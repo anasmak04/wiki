@@ -99,7 +99,11 @@ class WikiImp implements DataRepository
     public function findAll()
     {
         try {
-            $query = "SELECT w.* , u.name AS Author, c.name AS categoryName FROM wiki w LEFT JOIN user u ON w.author_id = u.id LEFT JOIN category c ON w.category_id = c.id WHERE status = 1";
+            $query = "SELECT w.*, u.name AS Author, c.name AS categoryName FROM wiki w 
+            LEFT JOIN user u ON w.author_id = u.id 
+            LEFT JOIN category c ON w.category_id = c.id 
+            WHERE status = 1 
+            ORDER BY w.created_at DESC";
 
             $statement = $this->database->prepare($query);
             $statement->execute();
@@ -208,5 +212,4 @@ class WikiImp implements DataRepository
             error_log("Error: " . $e->getMessage());
         }
     }
-    
 }
