@@ -43,18 +43,20 @@
                 </select><br><br>
 
                 <label for="category_id">Tags:</label>
-
+                <!-- 
                 <select id="" name="tag">
                     <?php foreach ($tags as $tag) { ?>
                         <option value="<?= $tag->id ?>"><?= $tag->name ?></option>
                     <?php } ?>
-                </select><br><br>
+                </select><br><br> -->
 
-                <!-- <select id="multiple-tags" name="tags[]" multiple>
+                <select id="multiple-tags" name="tags[]" multiple>
                     <?php foreach ($tags as $tag) { ?>
                         <option value="<?= $tag->id ?>"><?= $tag->name ?></option>
                     <?php } ?>
-                </select> -->
+                </select>
+
+
             </fieldset>
 
             <button type="submit" name="submitWiki">Submit</button>

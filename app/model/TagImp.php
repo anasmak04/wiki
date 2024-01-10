@@ -39,7 +39,7 @@ class TagImp implements DataRepository
     public function getLastInsertedId()
     {
         try {
-            $query = "SELECT id FROM `tag` ORDER BY id DESC LIMIT 1";
+            $query = "SELECT * FROM `tag`";
             $statement = $this->database->prepare($query);
             $statement->execute();
             $lastInsertedId = $statement->fetchColumn();

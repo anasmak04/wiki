@@ -148,14 +148,9 @@
                             <div class="card-content">
                                 <ul class="card-meta-list">
                                     <li>
-                                        <a href="#" class="card-tag">Design</a>
+                                        <a href="#" class="card-tag"><?= $wiki->tag_names; ?></a>
                                     </li>
-                                    <li>
-                                        <a href="#" class="card-tag">Idea</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="card-tag">Review</a>
-                                    </li>
+                                    
                                 </ul>
 
                                 <h3 class="h4">
@@ -200,7 +195,10 @@
                                         <button>edit</button>
                                     </form>
 
-
+                                    <form action="detail" method="GET">
+                                        <input type="hidden" name="id" value="<?= $wiki->id ?>">
+                                        <button type="submit">details</button>
+                                    </form>
                                 <?php
                                 }
                                 ?>
@@ -215,7 +213,7 @@
             </section>
 
 
-            <section class="section newsletter">
+            <!-- <section class="section newsletter">
 
                 <h5 class="h2 section-title">
                     Subscribe to new posts
@@ -227,7 +225,7 @@
                     <button type="submit" class="btn">Subscribe</button>
                 </form>
 
-            </section>
+            </section> -->
 
         </article>
     </main>

@@ -41,8 +41,7 @@ class AdminController
     public function findAllWikis()
     {
         $wikis = $this->wikiModel->findAll2();
-            require_once "../../views/admin/wikiAdmin.php";
-        
+        require_once "../../views/admin/wikiAdmin.php";
     }
 
     public function routewiki()
@@ -75,8 +74,8 @@ class AdminController
     public function archiver()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $id = $_POST["id"]; 
-            $status = 0; 
+            $id = $_POST["id"];
+            $status = 0;
             $this->wikiModel->update33($status, $id);
             header("Location: displayWiki");
             exit;
@@ -84,5 +83,4 @@ class AdminController
             echo "noot works";
         }
     }
-    
 }

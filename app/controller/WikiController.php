@@ -36,7 +36,7 @@ class WikiController
                     $this->wikiModel->save($wiki);
                     header("Location: displayWiki");
                     exit;
-                } 
+                }
             }
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
@@ -48,10 +48,17 @@ class WikiController
     public function findAllWikis()
     {
         $wikis = $this->wikiModel->findAll();
-       
+
         require_once  "../../views/wiki/displayWiki.php";
     }
 
+
+    public function detail()
+    {
+        $id = $_GET["id"];
+        $wiki =  $this->wikiModel->findById($id);
+        require_once "../../views/wiki/details.php";
+    }
 
 
 

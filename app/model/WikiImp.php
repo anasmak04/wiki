@@ -38,17 +38,23 @@ class WikiImp implements DataRepository
 
             if (!empty($title) && !empty($content) && !empty($date) && !empty($authorId) && !empty($categoryId)) {
 
-                $query = "INSERT INTO `wiki`(`title`, `content`, `image`, `status` ,`created_at`, `author_id`, `category_id`) VALUES (?,?,?,?,?,?,?)";
+                $query = "INSERT INTO `wiki`(`title`, `content`, `image`, `status`, `created_at`, `author_id`, `category_id`) VALUES (?,?,?,?,?,?,?)";
                 $statement = $this->database->prepare($query);
                 $statement->execute([$title, $content, $image, $status, $date, $authorId, $categoryId]);
 
                 $wikiId = $this->database->lastInsertId();
 
-                $tag = new TagImp();
-                $tagId = $tag->getLastInsertedId();
-                $wikitagQuery = "INSERT INTO `wikitag`(`wiki_id`, `tag_id`) VALUES (?, ?)";
-                $wikitagStatement = $this->database->prepare($wikitagQuery);
-                $wikitagStatement->execute([$wikiId, $tagId]);
+                $selectedTagIds = $_POST['tags'] ?? [];
+
+                if (!empty($wikiId) && !empty($selectedTagIds)) {
+                    foreach ($selectedTagIds as $tagId) {
+                        $wikitagQuery = "INSERT INTO `wikitag`(`wiki_id`, `tag_id`) VALUES (?, ?)";
+                        $wikitagStatement = $this->database->prepare($wikitagQuery);
+                        $wikitagStatement->execute([$wikiId, $tagId]);
+                    }
+                } else {
+                    throw new Exception("No tags selected or wiki ID missing.");
+                }
             } else {
                 throw new Exception("Required fields are empty.");
             }
@@ -99,11 +105,7 @@ class WikiImp implements DataRepository
     public function findAll()
     {
         try {
-            $query = "SELECT w.*, u.name AS Author, c.name AS categoryName FROM wiki w 
-            LEFT JOIN user u ON w.author_id = u.id 
-            LEFT JOIN category c ON w.category_id = c.id 
-            WHERE status = 1 
-            ORDER BY w.created_at DESC";
+            $query = "SELECT w.id, w.title, w.content, w.image, w.status, w.created_at, w.author_id, u.email AS user_email, c.name AS category_name, GROUP_CONCAT(t.name SEPARATOR '#') AS tag_names FROM wiki w JOIN user u ON w.author_id = u.id JOIN category c ON w.category_id = c.id JOIN wikiTag wt ON w.id = wt.wiki_id JOIN tag t ON wt.tag_id = t.id WHERE status = 1 GROUP BY w.id, w.title, w.content, w.image, w.status, w.created_at, w.author_id, u.email, c.name;";
 
             $statement = $this->database->prepare($query);
             $statement->execute();
@@ -136,7 +138,36 @@ class WikiImp implements DataRepository
     public function findById($id)
     {
         try {
-            $query = "SELECT * FROM `wiki` WHERE id = ? ";
+            $query = "SELECT 
+            w.id,
+            w.title,
+            w.content,
+            w.image,
+            w.status,
+            w.created_at,
+            w.author_id,
+            u.email AS user_email,
+            u.name AS user_name,
+            u.linkedin AS user_linkedin,
+            u.email AS user_github,
+            c.name AS category_name,
+            GROUP_CONCAT(t.name SEPARATOR '#') AS tag_names
+        FROM 
+            wiki w
+        JOIN 
+            user u ON w.author_id = u.id
+        JOIN 
+            category c ON w.category_id = c.id
+        JOIN 
+            wikiTag wt ON w.id = wt.wiki_id
+        JOIN 
+            tag t ON wt.tag_id = t.id 
+        WHERE 
+            w.status = 1 AND
+            w.id = ? 
+        GROUP BY 
+            w.id, w.title, w.content, w.image, w.status, w.created_at, w.author_id, u.email, c.name;
+        ";
             $statement = $this->database->prepare($query);
             $statement->execute([$id]);
             $wiki = $statement->fetch();

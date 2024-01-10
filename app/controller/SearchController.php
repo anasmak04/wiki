@@ -17,7 +17,7 @@ class SearchController
     {
         if (isset($_GET['q'])) {
             $query = $_GET['q'];
-            $stmt = $this->database->prepare("SELECT title, content FROM `wiki` WHERE title LIKE ?");
+            $stmt = $this->database->prepare("SELECT * FROM `wiki` WHERE title LIKE ?");
             $stmt->execute(["%$query%"]);
             $results = $stmt->fetchAll();
 

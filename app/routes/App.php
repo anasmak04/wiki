@@ -34,7 +34,9 @@ $router->setRoutes([
         "categories" => ["CategoryController", "getAllcategories"],
         "edit" => ["CategoryController", "edit"],
         "show" => ["TagsController", "viewtags"],
-        "edittagView" => ["TagsController", "editbyid"]
+        "edittagView" => ["TagsController", "editbyid"],
+        "detail" => ["WikiController", "detail"],
+        "detail" => ["WikiController", "detail"]
     ],
 
     'POST' => [
