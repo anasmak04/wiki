@@ -1,50 +1,33 @@
 <?php
-
 namespace App\entity;
 
 class Category
 {
-    private $id;
-    private $name;
+    private  $id;
+    private  $name;
 
-    /**
-     * @param $id
-     * @param $name
-     */
-    public function __construct($id, $name)
+    public function __construct( $id,  $name)
     {
         $this->id = $id;
         $this->name = $name;
     }
 
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
     }
 
-    /**
-     * @return mixed
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * @param mixed $name
-     */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }

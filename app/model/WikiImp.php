@@ -157,22 +157,22 @@ class WikiImp implements DataRepository
         }
     }
 
-    
-    public function update3($Wiki){
-        try{
+
+    public function update3($Wiki)
+    {
+        try {
             $id = $Wiki->getId();
             $status = $Wiki->getStatus();
             $query = "UPDATE wiki SET status = ? WHERE id = ?";
             $statement = $this->database->prepare($query);
             $statement->execute([$status, $id]);
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             error_log("Something went wrong in the database: " . $e->getMessage());
         } catch (Exception $e) {
             error_log("Error: " . $e->getMessage());
         }
     }
-    
+
 
     public function update2($Wiki, $id)
     {
@@ -194,4 +194,19 @@ class WikiImp implements DataRepository
             error_log("Error: " . $e->getMessage());
         }
     }
+
+
+    public function update33($status, $id)
+    {
+        try {
+            $query = "UPDATE `wiki` SET `status` = ? WHERE `id` = ?";
+            $statement = $this->database->prepare($query);
+            $statement->execute([$status, $id]);
+        } catch (PDOException $e) {
+            error_log("Something went wrong in the database: " . $e->getMessage());
+        } catch (Exception $e) {
+            error_log("Error: " . $e->getMessage());
+        }
+    }
+    
 }

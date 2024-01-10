@@ -64,6 +64,9 @@ class UserImp implements DataRepository, AuthRepository
     }
 
 
+ 
+
+
     public function deleteById($id)
     {
         try {
@@ -124,20 +127,20 @@ class UserImp implements DataRepository, AuthRepository
             $statement = $this->database->prepare($query);
             $statement->execute([$email]);
             $user = $statement->fetch();
-
+            session_start();
+            $_SESSION["role"] = $user->roleId;
+            $_SESSION["userId"] = $user->id_user;
+            $_SESSION["username"] = $user->userName;
+            $_SESSION["image"] = $user->imagep;
             if ($user) {
                 if (password_verify($password, $user->password)) {
-                    session_start();
-                    $_SESSION["role"] = $user->roleId;
-                    $_SESSION["userId"] = $user->id_user;
-                    $_SESSION["username"] = $user->userName;
-                    $_SESSION["image"] = $user->imagep;
+
 
                     if ($_SESSION["role"] == 2) {
                         header("Location: displayWiki");
                         exit();
                     } else if ($_SESSION["role"] == 1) {
-                        header("Location: dashbord");
+                        header("Location: dashboard");
                         exit();
                     }
                 } else {

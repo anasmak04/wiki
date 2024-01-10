@@ -111,7 +111,7 @@ class UserController
     public function getAllUsers()
     {
         $users =  $this->userModel->findAll();
-        require_once "../../views/users.php";
+        require_once "../../views/client/users.php";
     }
 
     public function logoutview()
@@ -131,5 +131,9 @@ class UserController
             header("Location: users");
             exit;
         }
+    }
+
+    public function archiver(){
+        
     }
 }

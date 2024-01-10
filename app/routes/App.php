@@ -49,9 +49,10 @@ $router->setRoutes([
         "wupdate" => ["WikiController", "updateWiki"],
         "adminupdatewiki" => ["AdminController", "adminupdatewiki"],
         "deletecategory" => ["CategoryController", "deleteCategory"],
-        "editapp" => ["CategoryController", "editCategory"],
+        "editapp" => ["CategoryController", "editc"],
         "deletetag" => ["TagsController", "deleteTag"],
-        "updatetag" => ["TagsController", "updatetag"]
+        "updatetag" => ["TagsController", "updatetag"],
+        "archiver" => ["AdminController", "archiver"]
     ]
 ]);
 

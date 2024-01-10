@@ -113,27 +113,21 @@
 
 
                 <?php
-                if ($_SESSION["role"] !== 2) { ?>
+                if ($_SESSION["role"] !== 2 && $_SESSION["role"] !== 1) { ?>
                     <a href="#" class="btn">Join</a>
-                <?php
-                }
-                ?>
+                <?php } ?>
 
 
+
                 <?php
-                if ($_SESSION["role"] == 2) { ?>
+                if ($_SESSION["role"] == 2 || $_SESSION["role"] == 1) { ?>
                     <div class="avatar-dropdown">
                         <img style="width:50px;" src="<?php echo $_SESSION["image"]; ?>" alt="" class="avatar">
                         <ul class="dropdown-menu">
                             <li> <a href="http://localhost/wiki/profile"> view profile</a>
                             </li>
 
-                            <?php
-                            if ($_SESSION["role"] !== 2) { ?>
-                                <li><a href="#" class="">Join</a></li>
-                            <?php
-                            }
-                            ?>
+
                             <li> <a href="http://localhost/wiki/logout" class="">Logout</a>
                             </li>
                         </ul>
@@ -193,7 +187,7 @@
                 <input type="text" id="searchInput" placeholder="Search announcements..." />
                 <div id="searchResults">
 
-                
+
                 </div>
             </div>
 
@@ -247,6 +241,19 @@
                                 <p class="card-text">
                                     <?php echo $wiki->content; ?>
                                 </p>
+
+
+                                <?php
+
+                                if ($_SESSION["role"] == 1) {
+                                ?>
+                                    <form action="archiver" method="POST">
+                                        <input type="hidden" name="id" value="<?= $wiki->id ?>">
+                                        <button type="submit">Archiver</button>
+                                    </form>
+                                <?php
+                                }
+                                ?>
 
 
                                 <?php

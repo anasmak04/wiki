@@ -64,9 +64,6 @@ class CategoryController
     }
 
 
-
-
-    
     public function edit()
     {
         $id = $_GET["id"];
@@ -75,16 +72,12 @@ class CategoryController
     }
 
 
-    public function editCategory()
+    public function editc()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['editsubmit'])) {
             $category = new Category(null, null);
-
-
             $category->setName($_POST["name"]);
             $this->categoryModel->update($category);
-
-            
             header("Location: categories");
             exit;
         }

@@ -74,4 +74,18 @@ class AdminController
             exit;
         }
     }
+
+    public function archiver()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $id = $_POST["id"]; 
+            $status = 0; 
+            $this->wikiModel->update33($status, $id);
+            header("Location: displayWiki");
+            exit;
+        } else {
+            echo "noot works";
+        }
+    }
+    
 }
