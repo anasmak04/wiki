@@ -147,9 +147,6 @@
 
 
 
-
-
-
     <div class="search-bar" data-search-bar>
 
         <div class="input-wrapper">
@@ -174,7 +171,6 @@
     <main>
         <article>
 
-
             <section class="section hero" aria-label="home">
                 <div class="container">
 
@@ -187,14 +183,19 @@
                 </div>
             </section>
 
-            <a href="index" class="btn">add new wiki</a>
+            <a href="index" class="">add new wiki</a>
 
 
 
 
 
-            <input type="text" id="searchInput" placeholder="Search announcements..." />
-            <div id="searchResults"></div>
+            <div style="text-align:center;">
+                <input type="text" id="searchInput" placeholder="Search announcements..." />
+                <div id="searchResults">
+
+                
+                </div>
+            </div>
 
             <section class="section featured" aria-label="featured post">
                 <div class="container container1">

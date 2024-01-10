@@ -112,6 +112,23 @@ class WikiImp implements DataRepository
         }
     }
 
+
+    public function findAll2()
+    {
+        try {
+            $query = "SELECT w.* , u.name AS Author, c.name AS categoryName FROM wiki w LEFT JOIN user u ON w.author_id = u.id LEFT JOIN category c ON w.category_id = c.id";
+
+            $statement = $this->database->prepare($query);
+            $statement->execute();
+            $wikis = $statement->fetchAll();
+            return $wikis;
+        } catch (PDOException $e) {
+            error_log("something went wrong in database : " . $e->getMessage());
+        } catch (Exception $e) {
+            error_log("Error : " . $e->getMessage());
+        }
+    }
+
     public function findById($id)
     {
         try {

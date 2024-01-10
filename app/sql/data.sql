@@ -10,10 +10,6 @@ CREATE TABLE category (
     name VARCHAR(50)
 );
 
-CREATE TABLE tag (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(100)
-);
 
 CREATE TABLE user (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -53,6 +49,11 @@ CREATE TABLE wiki (
     FOREIGN KEY (author_id) REFERENCES user(id) ON DELETE CASCADE,
     category_id INT,
     FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE SET NULL
+);
+
+CREATE TABLE tag (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100)
 );
 
 

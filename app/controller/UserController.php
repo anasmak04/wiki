@@ -52,7 +52,7 @@ class UserController
 
     public function viewHome()
     {
-        require_once   "../../views/index.php";
+        require_once   "../../views/wiki/index.php";
     }
 
 
@@ -74,7 +74,7 @@ class UserController
 
 
         if ($user) {
-            require_once  "../../views/profile.php";
+            require_once  "../../views/client/profile.php";
         } else {
             echo "User not found.";
         }
@@ -104,7 +104,7 @@ class UserController
 
     public function viewAdmin()
     {
-        require_once "../../views/users.php";
+        require_once "../../views/client/users.php";
     }
 
 

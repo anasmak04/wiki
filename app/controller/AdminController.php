@@ -24,7 +24,7 @@ class AdminController
 
     public function index()
     {
-        require_once "../../views/dashbord.php";
+        require_once "../../views/admin/dashboard.php";
     }
 
     public function Count()
@@ -33,13 +33,14 @@ class AdminController
         $categoryCount = $this->adminImp->countCategoies();
         $wikiCount = $this->adminImp->countWikis();
         $data = $this->adminImp->countWikiPerDay();
-        require_once "../../views/dashbord.php";
+        $tagCount = $this->adminImp->countTags();
+        require_once "../../views/admin/dashboard.php";
     }
 
 
     public function findAllWikis()
     {
-        $wikis = $this->wikiModel->findAll();
+        $wikis = $this->wikiModel->findAll2();
         if (!empty($wikis)) {
             require_once "../../views/admin/wikiAdmin.php";
         } else {

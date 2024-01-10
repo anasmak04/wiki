@@ -46,11 +46,21 @@ class AdminImp implements AdminRepository
         return $wikiCount;
     }
 
-    public function countWikiPerDay(){
+    public function countWikiPerDay()
+    {
         $query = "SELECT MONTHNAME(created_at) AS monthname, COUNT(*) AS wikicount FROM wiki GROUP BY monthname ORDER BY MONTH(created_at)";
         $statement = $this->database->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $data;
+    }
+
+    public function countTags()
+    {
+        $query = "SELECT COUNT(*) AS total_tags FROM tag";
+        $statement = $this->database->prepare($query);
+        $statement->execute();
+        $tagCount = $statement->fetch();
+        return $tagCount;
     }
 }

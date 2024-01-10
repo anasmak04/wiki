@@ -51,7 +51,7 @@ class WikiController
     {
         $wikis = $this->wikiModel->findAll();
         if (!empty($wikis)) {
-            require_once  "../../views/displayWiki.php";
+            require_once  "../../views/wiki/displayWiki.php";
         } else {
             echo "wikis not found.";
         }
@@ -94,7 +94,7 @@ class WikiController
     {
         $id = $_GET["id"];
         $wiki = $this->wikiModel->findById($id);
-        require_once "../../views/updateview.php";
+        require_once "../../views/wiki/updateview.php";
     }
 
 
@@ -115,6 +115,6 @@ class WikiController
 
     public function wiki()
     {
-        require_once("../../views/displayWiki.php");
+        require_once("../../views/wiki/displayWiki.php");
     }
 }

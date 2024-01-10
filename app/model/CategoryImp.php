@@ -35,6 +35,22 @@ class CategoryImp implements DataRepository
         }
     }
 
+    public function findById($id)
+    {
+        try {
+
+            $query = "SELECT * FROM category WHERE id = ? ";
+            $statement = $this->database->prepare($query);
+            $statement->execute([$id]);
+            $category = $statement->fetch();
+            return $category;
+        } catch (PDOException $e) {
+            error_log("something went wrong in database : " . $e->getMessage());
+        } catch (Exception $e) {
+            error_log("Error : " . $e->getMessage());
+        }
+    }
+
 
     public function update($Category)
     {
@@ -42,7 +58,7 @@ class CategoryImp implements DataRepository
 
             $name = $Category->getName();
             $id = $Category->getId();
-            $query = "UPDATE `category` SET `name` = ? WHERE `id` = ?";
+        $query = "UPDATE `category` SET `name` = ? WHERE `id` = ?";
             $statemnt = $this->database->prepare($query);
             $statemnt->execute([$name,$id]);
         } catch (PDOException $e) {
@@ -81,19 +97,5 @@ class CategoryImp implements DataRepository
         }
     }
 
-    public function findById($id)
-    {
-        try {
-
-            $query = "SELECT * FROM category WHERE id = ? ";
-            $statement = $this->database->prepare($query);
-            $statement->execute([$id]);
-            $category = $statement->fetch();
-            return $category;
-        } catch (PDOException $e) {
-            error_log("something went wrong in database : " . $e->getMessage());
-        } catch (Exception $e) {
-            error_log("Error : " . $e->getMessage());
-        }
-    }
+ 
 }

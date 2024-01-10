@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tag List</title>
+    <title>Beautiful Table</title>
+    <link rel="stylesheet" href="/wiki/public/css/styles1.css">
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
         body {
@@ -94,30 +95,29 @@
     </div>
 </nav>
 
-    <!-- Tag List -->
-    <div class="container" style="margin-top: 70px;">
-        <h1>Tag List</h1>
+    <!-- User List Table -->
+    <div class="table-container" style="margin-top: 70px;">
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Name</th>
-                    <th>Action</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($tags as $tag) : ?>
+                <?php foreach ($users as $user) : ?>
                     <tr>
-                        <td><?= $tag->id ?></td>
-                        <td><?= $tag->name ?></td>
-                        <td class="actions">
-                            <form action="deletetag" method="POST">
-                                <input type="hidden" name="id" value="<?= $tag->id; ?>">
+                        <td><?= $user->name; ?></td>
+                        <td><?= $user->username; ?></td>
+                        <td><?= $user->email; ?></td>
+                        <td><?= $user->role_id; ?></td>
+                        <td>
+                            <form action="deleteUser" method="POST">
+                                <input type="hidden" name="id" value="<?= $user->id ?>">
                                 <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                            <form action="edittagView" method="GET">
-                                <input type="hidden" name="id" value="<?= $tag->id; ?>">
-                                <button type="submit" class="btn btn-primary">Edit</button>
                             </form>
                         </td>
                     </tr>
@@ -127,7 +127,9 @@
     </div>
 
     <!-- Bootstrap and other scripts -->
+    <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>
 

@@ -31,14 +31,14 @@ class TagsController
 
     public function index()
     {
-        require_once "../../views/tags.php";
+        require_once "../../views/tags/tags.php";
     }
 
     public function getAll()
     {
         $tags = $this->TagsModel->findAll();
         $categories = $this->CategpryModel->findAll();
-        require_once "../../views/index.php";
+        require_once "../../views/wiki/index.php";
     }
 
     public function deleteTag()

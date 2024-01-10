@@ -34,7 +34,7 @@ class UserImp implements DataRepository, AuthRepository
 
             $query = "INSERT INTO `user`(`name`, `username`, `email`, `password`, `image` , `role_id`) VALUES (?,?,?,?,?,?)";
             $statement = $this->database->prepare($query);
-            $statement->execute([$name, $username, $email, $hashedPassword , $image , $role]);
+            $statement->execute([$name, $username, $email, $hashedPassword, $image, $role]);
             echo "Worked!";
         } catch (PDOException $e) {
             error_log("something went wrong in database : " . $e->getMessage());
@@ -55,7 +55,7 @@ class UserImp implements DataRepository, AuthRepository
 
             $query = "UPDATE `user` SET `name` = ?, `username` = ?, `email` = ? , `linkedin` = ? , `github` = ? WHERE id = ?";
             $statement = $this->database->prepare($query);
-            $statement->execute([$name, $username, $email, $linkedin , $github , $id]);
+            $statement->execute([$name, $username, $email, $linkedin, $github, $id]);
         } catch (PDOException $e) {
             error_log("Something went wrong in the database: " . $e->getMessage());
         } catch (Exception $e) {
@@ -117,27 +117,34 @@ class UserImp implements DataRepository, AuthRepository
             $email = $User->getEmail();
             $password = $User->getPassword();
 
-            $query = "SELECT u.id AS id_user, u.name AS userName, u.image AS imagep , u.email AS userEmail , r.id AS roleId FROM user u INNER JOIN role r ON u.role_id = r.id WHERE u.email = ?";
+            $query = "SELECT u.id AS id_user, u.name AS userName, u.image AS imagep , u.email AS userEmail , r.id AS roleId, u.password 
+                  FROM user u 
+                  INNER JOIN role r ON u.role_id = r.id 
+                  WHERE u.email = ?";
             $statement = $this->database->prepare($query);
             $statement->execute([$email]);
             $user = $statement->fetch();
-            session_start();
-            $_SESSION["role"] = $user->roleId;
-            $_SESSION["userId"] = $user->id_user;
-            $_SESSION["username"] = $user->userName;
-            $_SESSION["image"] = $user->imagep;
 
-            if ($user && password_verify($password, $user->hashedPassword)) {
-                if ($_SESSION["role"] == 2) {
-                    header("Location: displayWiki");
-                    exit();
+            if ($user) {
+                if (password_verify($password, $user->password)) {
+                    session_start();
+                    $_SESSION["role"] = $user->roleId;
+                    $_SESSION["userId"] = $user->id_user;
+                    $_SESSION["username"] = $user->userName;
+                    $_SESSION["image"] = $user->imagep;
+
+                    if ($_SESSION["role"] == 2) {
+                        header("Location: displayWiki");
+                        exit();
+                    } else if ($_SESSION["role"] == 1) {
+                        header("Location: dashbord");
+                        exit();
+                    }
+                } else {
+                    echo "Incorrect password";
                 }
-                
-            }
-
-            else {
-                header("Location: displayWiki");
-                exit();
+            } else {
+                echo "Email does not exist";
             }
         } catch (PDOException $e) {
             echo "Something went wrong: " . $e->getMessage();

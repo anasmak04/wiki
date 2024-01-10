@@ -63,6 +63,10 @@ class CategoryController
         require_once "../../views/category.php";
     }
 
+
+
+
+    
     public function edit()
     {
         $id = $_GET["id"];
