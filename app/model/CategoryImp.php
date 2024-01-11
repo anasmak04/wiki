@@ -26,7 +26,7 @@ class CategoryImp implements DataRepository
             $query = "INSERT INTO `category`(`name`) VALUES (?)";
             $statement = $this->database->prepare($query);
             $statement->execute([$name]);
-            header("Location: dashbord");
+            header("Location: dashboard");
             exit();
         } catch (PDOException $e) {
             error_log("Something went wrong in the database: " . $e->getMessage());

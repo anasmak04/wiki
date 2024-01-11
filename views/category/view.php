@@ -1,3 +1,9 @@
+<?php 
+if (!isset($_SESSION['userId'])) {
+    header("Location: login");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +13,7 @@
     <title>Category Table</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
-         body {
+        body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -70,33 +76,40 @@
 
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header text-center">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="d-flex justify-content-center align-items-center">
-                <img src="/wiki/public/assets/logo.svg" alt="" class="navbar-brand">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header text-center">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="/wiki/public/assets/logo.svg" alt="" class="navbar-brand">
+                </div>
+            </div>
+            <div class="collapse navbar-collapse text-center" id="myNavbar">
+                <ul class="nav navbar-nav navbar-center">
+                    <li class="active"><a href="">Dashboard</a></li>
+                    <li><a href="categories">Category</a></li>
+                    <li><a href="Adminwiki">Wiki</a></li>
+                    <li><a href="show">Tags</a></li>
+                    <li><a href="users">Users</a></li>
+                </ul>
             </div>
         </div>
-        <div class="collapse navbar-collapse text-center" id="myNavbar">
-            <ul class="nav navbar-nav navbar-center">
-                <li class="active"><a href="">Dashboard</a></li>
-                <li><a href="categories">Category</a></li>
-                <li><a href="Adminwiki">Wiki</a></li>
-                <li><a href="show">Tags</a></li>
-                <li><a href="users">Users</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Category List -->
     <div class="container" style="margin-top: 70px;">
         <h1>Category List</h1>
+
+        <!-- Add New Category Button -->
+        <div class="text-right" style="margin-bottom: 10px;">
+            <a href="http://localhost/wiki/category" class="btn btn-success">Add New Category</a>
+        </div>
+
+        <!-- Category List Table -->
         <table class="table">
             <thead>
                 <tr>

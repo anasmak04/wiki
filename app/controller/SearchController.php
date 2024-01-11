@@ -16,21 +16,19 @@ class SearchController
     public function search()
     {
         if (isset($_GET['q'])) {
-            $query = $_GET['q'];
-            $stmt = $this->database->prepare("SELECT * FROM `wiki` WHERE title LIKE ?");
-            $stmt->execute(["%$query%"]);
+            $query = '%' . $_GET['q'] . '%';
+            $stmt = $this->database->prepare("SELECT w.title, w.content, c.name as category_name, t.name as tag_name
+                FROM wiki w
+                LEFT JOIN category c ON w.category_id = c.id
+                JOIN wikiTag wt ON w.id = wt.wiki_id
+                JOIN tag t ON wt.tag_id = t.id
+                WHERE w.title LIKE ? OR c.name LIKE ? OR t.name LIKE ?;
+            ");
+            $stmt->execute([$query, $query, $query]);
             $results = $stmt->fetchAll();
 
-            $data = [];
-            foreach ($results as $row) {
-                $data[] = [
-                    'title' => $row->title,
-                    'content' => $row->content
-                ];
-            }
-
             header('Content-Type: application/json');
-            echo json_encode($data);
+            echo json_encode($results);
             exit();
         }
     }

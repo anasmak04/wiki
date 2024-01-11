@@ -2,386 +2,234 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogy - Hey, we’re Blogy. See our thoughts, stories and ideas.</title>
-    <meta name="title" content="Blogy - Hey, we’re Blogy. See our thoughts, stories and ideas.">
-    <meta name="description" content="This is a blog html template made by codewithsadee">
-    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="/wiki/public/css/home.css">
-    <link rel="stylesheet" href="/wiki/public/css/style3.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Blog Home - Start Bootstrap Template</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link href="/wiki/public/css/stylee.css" rel="stylesheet" />
+    <link href="/wiki/public/css/style3.css" rel="stylesheet" />
 </head>
 
 <body>
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border">
+        <div class="container">
+            <img src="/wiki/public/assets/logo.svg" class="navbar-brand" href="#!"></img>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
+                    <?php if (!isset($_SESSION["role"]) || $_SESSION["role"] === 'guest') { ?>
+                        <a href="http://localhost/wiki/register" class="btn btn-primary">Join</a>
 
-    <header class="header section" data-header>
-        <div class="container container2">
+                    <?php } ?>
 
-            <a href="#" class="logo">
-                <img src="/wiki/public/assets/logo.svg" width="129" height="40" alt="Blogy logo">
-            </a>
-
-            <nav class="navbar" data-navbar>
-                <ul class="navbar-list">
-
-                    <li class="navbar-item">
-                        <a href="#" class="navbar-link hover:underline" data-nav-link>Home</a>
-                    </li>
-
-                    <li class="navbar-item">
-                        <a href="#" class="navbar-link hover:underline" data-nav-link>Recent Post</a>
-                    </li>
-
+                    <?php if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2 || $_SESSION["role"] == 1)) { ?>
+                        <div class="avatar-dropdown">
+                            <img style="width:50px;" src="<?php echo isset($_SESSION["image"]) ? $_SESSION["image"] : ''; ?>" alt="" class="avatar">
+                            <ul class="dropdown-menu">
+                                <li><a href="http://localhost/wiki/profile">View Profile</a></li>
+                                <li><a href="http://localhost/wiki/logout">Logout</a></li>
+                            </ul>
+                        </div>
+                    <?php } ?>
 
                 </ul>
-            </nav>
-
-            <div class="wrapper">
-
-
-                <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
-                    <span class="span one"></span>
-                    <span class="span two"></span>
-                    <span class="span three"></span>
-                </button>
+            </div>
+        </div>
+    </nav>
 
 
 
-                <?php
-                if ($_SESSION["role"] !== 2 && $_SESSION["role"] !== 1) { ?>
-                    <a href="#" class="btn">Join</a>
+    <header class="py-5 bg-light border-bottom mb-4">
+        <div class="container">
+            <div class="text-center my-5">
+                <h1 class="fw-bolder">EXPLORE THE BLOGSCAPE</h1>
+                <?php if (isset($_SESSION['userId'])) { ?>
+                    <p class="lead mb-0"><a href="http://localhost/wiki/index" class="btn btn-primary">Add New Wiki</a></p>
                 <?php } ?>
 
-
-
-                <?php
-                if ($_SESSION["role"] == 2 || $_SESSION["role"] == 1) { ?>
-                    <div class="avatar-dropdown">
-                        <img style="width:50px;" src="<?php echo $_SESSION["image"]; ?>" alt="" class="avatar">
-                        <ul class="dropdown-menu">
-                            <li> <a href="http://localhost/wiki/profile"> view profile</a>
-                            </li>
-
-
-                            <li> <a href="http://localhost/wiki/logout" class="">Logout</a>
-                            </li>
-                        </ul>
-                    </div> <?php
-                        }
-                            ?>
             </div>
-
         </div>
     </header>
+    <!-- Page content-->
+    <div class="container">
 
+        <div class="row">
+            <!-- Blog entries-->
+            <div class="col-lg-8">
+                <div class="card mb-4 existing-card">
 
-    <div class="search-bar" data-search-bar>
-
-        <div class="input-wrapper">
-            <input type="search" name="search" placeholder="Search" class="input-field">
-
-            <button class="search-close-btn" aria-label="close search bar" data-search-toggler>
-                <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
-            </button>
-
-        </div>
-
-        <p class="search-bar-text">Please enter at least 3 characters</p>
-
-    </div>
-
-    <div class="overlay" data-overlay data-search-toggler></div>
-
-
-    <main>
-        <article>
-
-            <section class="section hero" aria-label="home">
-                <div class="container">
-
-                    <h1 class="h1 hero-title">
-
-                        👋Welcome back <?= $_SESSION["username"]; ?> !
-                    </h1>
                 </div>
-            </section>
+
+                <!-- Featured blog post-->
+                <div class="card mb-4">
+                    <a href="#!"><img class="card-img-top" style="width:100%;height:300px;object-fit:cover;" src="<?= $wikis[0]->image ?>" alt="..." /></a>
+                    <div class="card-body">
+                        <div class="badge bg-primary"><?= $wikis[0]->tag_names ?></div> <br>
+                        <div class="badge bg-secondary"> <?= $wikis[0]->category_name ?></div>
+                        <h2 class="card-title"><?= $wikis[0]->title ?></h2>
+                        <p class="card-text"><?= $wikis[0]->content ?></p>
+
+                        <?php
+                        if (isset($_SESSION["userId"]) && $_SESSION["userId"] == $wikis[0]->author_id) :
+                        ?> <!-- Delete Button -->
+                            <form action="wdelete" method="POST" class="d-inline">
+                                <input type="hidden" name="id" value="<?= $wikis[0]->id ?>">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+
+                            <!-- Edit Button -->
+                            <form action="update" method="GET" class="d-inline">
+                                <input type="hidden" name="id" value="<?= $wikis[0]->id ?>">
+                                <button type="submit" class="btn btn-warning">Edit</button>
+                            </form>
 
 
-            <a href="index" class="add-wiki-link">Add New Wiki</a>
+                        <?php endif; ?>
 
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search for a wiki..." />
-                <div id="searchResults"></div>
-            </div>
+                        <!-- Details Button -->
+                        <form action="detail" method="GET" class="d-inline">
+                            <input type="hidden" name="id" value="<?= $wikis[0]->id ?>">
+                            <button type="submit" class="btn btn-info">Details</button>
+                        </form>
+                    </div>
 
+                </div>
 
-            <section class="section featured" aria-label="featured post">
-                <div class="container container1">
-                    <?php foreach ($wikis as $wiki) : ?>
-                        <p class="section-subtitle">
-                            Get started with our <strong class="strong">best stories</strong>
-                        </p>
+                <!-- Nested row for non-featured blog posts-->
+                <div class="row">
+                    <?php
 
-                        <div class="blog-card">
-                            <figure class="card-banner img-holder" style="--width: 500; --height: 600;">
-                                <img src="<?php echo $wiki->image; ?>" width="500" height="600" loading="lazy" alt="New technology is not good or evil in and of itself" class="img-cover">
-                                <ul class="avatar-list absolute">
-                                    <li class="avatar-item">
-                                        <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
-                                            <img src="./assets/images/author-1.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
-                                        </a>
-                                    </li>
-                                    <li class="avatar-item">
-                                        <a href="#" class="avatar img-holder" style="--width: 100; --height: 100;">
-                                            <img src="./assets/images/author-2.jpg" width="100" height="100" loading="lazy" alt="Author" class="img-cover">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </figure>
+                    foreach ($wikis as $wiki) :
+                    ?>
+                        <div class="col-lg-6">
+                            <!-- Blog post-->
+                            <div class="card mb-4">
+                                <a href="#!"><img class="card-img-top" src="<?= $wiki->image ?>" alt="..." style="width:100%;height:300px;object-fit:cover;" /></a>
+                                <div class="card-body">
+                                    <div class="badge bg-primary"><?= $wiki->tag_names ?></div> <br>
+                                    <div class="badge bg-secondary"> <?= $wikis[0]->category_name ?></div>
+                                    <h2 class="card-title h4"><?= $wiki->title ?></h2>
+                                    <p class="card-text"><?= $wiki->content ?>.</p>
+                                    <?php
+                                    if (isset($_SESSION["userId"]) && $_SESSION["userId"] == $wiki->author_id) :
+                                    ?> <!-- Delete Button -->
+                                        <form action="wdelete" method="POST" class="d-inline">
+                                            <input type="hidden" name="id" value="<?= $wiki->id ?>">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
 
-                            <div class="card-content">
-                                <ul class="card-meta-list">
-                                    <li>
-                                        <a href="#" class="card-tag"><?= $wiki->tag_names; ?></a>
-                                    </li>
-                                    
-                                </ul>
+                                        <!-- Edit Button -->
+                                        <form action="update" method="GET" class="d-inline">
+                                            <input type="hidden" name="id" value="<?= $wiki->id ?>">
+                                            <button type="submit" class="btn btn-warning">Edit</button>
+                                        </form>
 
-                                <h3 class="h4">
-                                    <a href="#" class="card-title hover:underline">
-                                        <?php echo $wiki->title; ?>
-                                    </a>
-
-                                    <a href="#" class="card-title hover:underline">
-                                        <?php echo $wiki->id; ?>
-                                    </a>
-                                </h3>
-
-                                <p class="card-text">
-                                    <?php echo $wiki->content; ?>
-                                </p>
-
-
-                                <?php
-
-                                if ($_SESSION["role"] == 1) {
-                                ?>
-                                    <form action="archiver" method="POST">
+                                    <?php endif; ?>
+                                    <form action="detail" method="GET" class="d-inline">
                                         <input type="hidden" name="id" value="<?= $wiki->id ?>">
-                                        <button type="submit">Archiver</button>
+                                        <button type="submit" class="btn btn-info">Details</button>
                                     </form>
-                                <?php
-                                }
-                                ?>
-
-
-                                <?php
-                                if ($_SESSION["userId"] == $wiki->author_id) {
-                                ?>
-
-                                    <form action="wdelete" method="POST">
-                                        <input type="hidden" name="id" value="<?= $wiki->id ?>">
-                                        <button type="submit">delete</button>
-                                    </form>
-
-                                    <form action="update" method="GET">
-                                        <input type="hidden" name="id" value="<?= $wiki->id ?>">
-                                        <button>edit</button>
-                                    </form>
-
-                                    <form action="detail" method="GET">
-                                        <input type="hidden" name="id" value="<?= $wiki->id ?>">
-                                        <button type="submit">details</button>
-                                    </form>
-                                <?php
-                                }
-                                ?>
-
-
-
-
+                                </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
-            </section>
 
 
-            <!-- <section class="section newsletter">
+            </div>
+            <!-- Side widgets-->
+            <div class="col-lg-4">
+                <!-- Search widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Search</div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="search" id="searchInput" name="search" placeholder="Search" class="form-control" />
+                        </div>
+                    </div>
+                </div>
 
-                <h5 class="h2 section-title">
-                    Subscribe to new posts
-                </h5>
-
-                <form action="" class="newsletter-form">
-                    <input type="email" name="email_address" placeholder="Your email address" required class="email-field">
-
-                    <button type="submit" class="btn">Subscribe</button>
-                </form>
-
-            </section> -->
-
-        </article>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-
-            <div class="footer-top section">
-
-                <div class="footer-brand">
-
-                    <a href="#" class="logo">
-                        <img src="/wiki/public/assets/logo.svg" width="129" height="40" alt="Blogy logo">
-                    </a>
-
-                    <p class="footer-text">
-                        A minimal, functional theme for running a paid-membership publication on Ghost.
-                    </p>
+                <div id="searchResults">
 
                 </div>
 
-                <ul class="footer-list">
 
-                    <li>
-                        <p class="h5">Social</p>
-                    </li>
+                <!-- Categories widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Categories</div>
+                    <div class="card-body">
+                        <?php foreach ($wikis as $wiki) : ?>
+                            <span class="badge bg-primary"><?php echo $wiki->category_name; ?></span>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
 
-                    <li class="footer-list-item">
-                        <ion-icon name="logo-facebook"></ion-icon>
 
-                        <a href="#" class="footer-link hover:underline">Facebook</a>
-                    </li>
+                <!-- Side widget-->
+                <!-- Tags widget -->
+                <div class="card mb-4">
+                    <div class="card-header">Tags</div>
+                    <div class="card-body">
+                        <?php foreach ($wikis as $wiki) : ?>
+                            <span class="badge bg-secondary"><?php echo $wiki->tag_names; ?></span>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
 
-                    <li class="footer-list-item">
-                        <ion-icon name="logo-twitter"></ion-icon>
-
-                        <a href="#" class="footer-link hover:underline">Twitter</a>
-                    </li>
-
-                    <li class="footer-list-item">
-                        <ion-icon name="logo-pinterest"></ion-icon>
-
-                        <a href="#" class="footer-link hover:underline">Pinterest</a>
-                    </li>
-
-                    <li class="footer-list-item">
-                        <ion-icon name="logo-vimeo"></ion-icon>
-
-                        <a href="#" class="footer-link hover:underline">Vimeo</a>
-                    </li>
-
-                </ul>
-
-                <ul class="footer-list">
-
-                    <li>
-                        <p class="h5">About</p>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">Style Guide</a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">Features</a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">Contact</a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">404</a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">Privacy Policy</a>
-                    </li>
-
-                </ul>
-
-                <ul class="footer-list">
-
-                    <li>
-                        <p class="h5">Features</p>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">Upcoming Events</a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">Blog & News</a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">Features</a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">FAQ Question</a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">Testimonial</a>
-                    </li>
-
-                </ul>
-
-                <ul class="footer-list">
-
-                    <li>
-                        <p class="h5">Membership</p>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">Account</a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">Membership</a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">Subscribe</a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">Tags</a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="footer-link hover:underline">Authors</a>
-                    </li>
-
-                </ul>
 
             </div>
+        </div>
+    </div>
+    <!-- Footer-->
 
-            <div class="section footer-bottom">
 
-                <p class="copyright">
-                    &copy; Blogy 2022. Published by <a href="#" class="copyright-link hover:underline">codewithsadee</a>.
-                </p>
 
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">Blog</a></li>
+                        <li><a href="#" class="text-white">About Us</a></li>
+                        <li><a href="#" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-3">Follow Us</h5>
+                    <!-- Social text links -->
+                    <p class="text-white"><a href="#" class="text-white"><i class="fab fa-facebook"></i> Facebook</a></p>
+                    <p class="text-white"><a href="#" class="text-white"><i class="fab fa-twitter"></i> Twitter</a></p>
+                    <p class="text-white"><a href="#" class="text-white"><i class="fab fa-instagram"></i> Instagram</a></p>
+
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-3">Contact Information</h5>
+                    <p class="text-muted">123 Street, Cityville, Country</p>
+                    <p class="text-muted">Email: info@example.com</p>
+                </div>
             </div>
-
+            <hr class="my-4">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>
         </div>
     </footer>
 
 
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/wiki/public/js/script.js" defer></script>
     <script src="/wiki/public/js/search.js" defer></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
 </body>
 
 </html>

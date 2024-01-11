@@ -42,6 +42,7 @@ class WikiImp implements DataRepository
                 $statement = $this->database->prepare($query);
                 $statement->execute([$title, $content, $image, $status, $date, $authorId, $categoryId]);
 
+
                 $wikiId = $this->database->lastInsertId();
 
                 $selectedTagIds = $_POST['tags'] ?? [];
@@ -105,7 +106,7 @@ class WikiImp implements DataRepository
     public function findAll()
     {
         try {
-            $query = "SELECT w.id, w.title, w.content, w.image, w.status, w.created_at, w.author_id, u.email AS user_email, c.name AS category_name, GROUP_CONCAT(t.name SEPARATOR '#') AS tag_names FROM wiki w JOIN user u ON w.author_id = u.id JOIN category c ON w.category_id = c.id JOIN wikiTag wt ON w.id = wt.wiki_id JOIN tag t ON wt.tag_id = t.id WHERE status = 1 GROUP BY w.id, w.title, w.content, w.image, w.status, w.created_at, w.author_id, u.email, c.name;";
+            $query = "SELECT w.id, w.title, w.content, w.image, w.status, w.created_at, w.author_id, u.email AS user_email, c.name AS category_name, GROUP_CONCAT(t.name SEPARATOR '#') AS tag_names FROM wiki w JOIN user u ON w.author_id = u.id JOIN category c ON w.category_id = c.id JOIN wikiTag wt ON w.id = wt.wiki_id JOIN tag t ON wt.tag_id = t.id WHERE w.status = 1 GROUP BY w.id, w.title, w.content, w.image, w.status, w.created_at, w.author_id, u.email, c.name ORDER BY w.created_at DESC;";
 
             $statement = $this->database->prepare($query);
             $statement->execute();
@@ -138,6 +139,23 @@ class WikiImp implements DataRepository
     public function findById($id)
     {
         try {
+            $query = "SELECT w.id, w.title, w.content, w.image as image, w.status, w.created_at, w.author_id, u.email AS user_email, u.name AS user_name, u.linkedin AS user_linkedin, u.email AS user_github, c.name AS category_name, c.id AS category_id, GROUP_CONCAT(t.name SEPARATOR '#') AS tag_names FROM wiki w JOIN user u ON w.author_id = u.id JOIN category c ON w.category_id = c.id LEFT JOIN wikiTag wt ON w.id = wt.wiki_id LEFT JOIN tag t ON wt.tag_id = t.id  WHERE  w.status = 1 AND w.id = ?  GROUP BY w.id, w.title, w.content, w.image, w.status, w.created_at, w.author_id, u.email, c.name;
+        ";
+            $statement = $this->database->prepare($query);
+            $statement->execute([$id]);
+            $wiki = $statement->fetch();
+            return $wiki;
+        } catch (PDOException $e) {
+            error_log("something went wrong in database : " . $e->getMessage());
+        } catch (Exception $e) {
+            error_log("Error : " . $e->getMessage());
+        }
+    }
+
+
+    public function findById2($id)
+    {
+        try {
             $query = "SELECT 
             w.id,
             w.title,
@@ -163,7 +181,6 @@ class WikiImp implements DataRepository
         JOIN 
             tag t ON wt.tag_id = t.id 
         WHERE 
-            w.status = 1 AND
             w.id = ? 
         GROUP BY 
             w.id, w.title, w.content, w.image, w.status, w.created_at, w.author_id, u.email, c.name;
@@ -178,6 +195,7 @@ class WikiImp implements DataRepository
             error_log("Error : " . $e->getMessage());
         }
     }
+
 
     public function deleteById2($wikiId, $userId)
     {
@@ -209,7 +227,9 @@ class WikiImp implements DataRepository
     }
 
 
-    public function update2($Wiki, $id)
+
+    /// update wiki
+    public function update2($Wiki,$id)
     {
         try {
             $id = $Wiki->getId();
@@ -218,17 +238,20 @@ class WikiImp implements DataRepository
             $image = $Wiki->getImage();
             $authorId = $Wiki->getAuthorId();
             $categoryId = $Wiki->getCategoryId();
-
+    
             $query = "UPDATE `wiki` SET `title` = ?, `content` = ?, `image` = ?, `author_id` = ?, `category_id` = ? WHERE `id` = ? AND author_id = ?";
             $statement = $this->database->prepare($query);
-
-            $statement->execute([$title, $content, $image, $authorId, $categoryId, $id]);
+    
+            $statement->execute([$title, $content, $image, $authorId, $categoryId, $id, $authorId]);
         } catch (PDOException $e) {
             error_log("Something went wrong in the database: " . $e->getMessage());
         } catch (Exception $e) {
             error_log("Error: " . $e->getMessage());
         }
     }
+    
+
+
 
 
     public function update33($status, $id)

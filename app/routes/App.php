@@ -36,7 +36,8 @@ $router->setRoutes([
         "show" => ["TagsController", "viewtags"],
         "edittagView" => ["TagsController", "editbyid"],
         "detail" => ["WikiController", "detail"],
-        "detail" => ["WikiController", "detail"]
+        "detail" => ["WikiController", "detail"],
+        // "showikis" => ["WikiController", "wiki2"],
     ],
 
     'POST' => [

@@ -32,7 +32,7 @@
                     </div>
 
                      <div class="input-field">
-                        <input type="file" placeholder="Enter your image" name="image" required id="name">
+                        <input type="file" placeholder="Enter your image" name="image"  id="name">
                     </div>
                     <button type="submit" name="submitRegister" class="btn">register</button>
                 </form>
@@ -58,6 +58,8 @@
     </div>
 
 
+
+    <script src="/wiki/public/js/script.js"></script>
 
     <!-- <script>
         const form = document.querySelector("form");

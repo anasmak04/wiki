@@ -71,6 +71,7 @@ class TagsController
             $tag = new Tag(null, null);
 
 
+            $tag->setId($_POST["id"]);
             $tag->setName($_POST["name"]);
             $this->TagsModel->update($tag);
 

@@ -53,8 +53,9 @@ class AdminController
     public function editview()
     {
         $id = $_GET["id"];
-        $wiki = $this->wikiModel->findById($id);
+        $wiki = $this->wikiModel->findById2($id);
         require_once "../../views/admin/Editview.php";
+
     }
 
 

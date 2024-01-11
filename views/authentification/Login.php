@@ -53,6 +53,9 @@
         });
     </script> -->
 
+
+    <script src="/wiki/public/js/script.js"></script>
+
 </body>
 
 </html>
