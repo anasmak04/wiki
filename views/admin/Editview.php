@@ -21,7 +21,7 @@ if (!isset($_SESSION['userId'])) {
         margin-top: 90px;
     }
 
-    input {
+    select {
         width: 100%;
         padding: 10px;
         margin-bottom: 15px;
@@ -62,7 +62,14 @@ if (!isset($_SESSION['userId'])) {
         <div class="con">
             <form action="adminupdatewiki" method="POST">
                 <input type="hidden" name="id" value="<?= $wiki->id; ?>">
-                <input type="number" name="status" value="<?= $wiki->status; ?>">
+
+                <select name="status">
+                    <option value="<?php echo $wiki->status; ?>">
+                        <?php echo ($wiki->status === '0') ? 'Accepter' : 'Refuser'; ?>
+                    </option>
+                </select>
+
+
                 <button type="submit">save</button>
             </form>
         </div>

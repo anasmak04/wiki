@@ -66,6 +66,29 @@ class WikiImp implements DataRepository
         }
     }
 
+    // public function update2($Wiki, $id)
+    // {
+    //     try {
+    //         $id = $Wiki->getId();
+    //         $title = $Wiki->getTitle();
+    //         $content = $Wiki->getContent();
+    //         $image = $Wiki->getImage();
+    //         $authorId = $Wiki->getAuthorId();
+    //         $categoryId = $Wiki->getCategoryId();
+
+    //         $query = "UPDATE `wiki` SET `title` = ?, `content` = ?, `image` = ?, `author_id` = ?, `category_id` = ? WHERE `id` = ? AND author_id = ?";
+    //         $statement = $this->database->prepare($query);
+
+    //         $statement->execute([$title, $content, $image, $authorId, $categoryId, $id, $authorId]);
+    //     } catch (PDOException $e) {
+    //         error_log("Something went wrong in the database: " . $e->getMessage());
+    //     } catch (Exception $e) {
+    //         error_log("Error: " . $e->getMessage());
+    //     }
+    // }
+
+
+    /// update wiki
     public function update2($Wiki, $id)
     {
         try {
@@ -76,58 +99,36 @@ class WikiImp implements DataRepository
             $authorId = $Wiki->getAuthorId();
             $categoryId = $Wiki->getCategoryId();
 
+            $this->database->beginTransaction();
+
+            // Step 1: Update wiki details
             $query = "UPDATE `wiki` SET `title` = ?, `content` = ?, `image` = ?, `author_id` = ?, `category_id` = ? WHERE `id` = ? AND author_id = ?";
             $statement = $this->database->prepare($query);
-
             $statement->execute([$title, $content, $image, $authorId, $categoryId, $id, $authorId]);
+
+            // Step 2: Delete existing tag associations
+            $deleteTagsQuery = "DELETE FROM `wikitag` WHERE `wiki_id` = ?";
+            $deleteTagsStatement = $this->database->prepare($deleteTagsQuery);
+            $deleteTagsStatement->execute([$id]);
+
+            // Step 3: Insert new tag associations
+            $selectedTagIds = $_POST['tags'] ?? [];
+            
+            foreach ($selectedTagIds as $tagId) {
+                $wikitagQuery = "INSERT INTO `wikitag`(`wiki_id`, `tag_id`) VALUES (?, ?)";
+                $wikitagStatement = $this->database->prepare($wikitagQuery);
+                $wikitagStatement->execute([$id, $tagId]);
+            }
+
+            $this->database->commit(); // Commit the transaction
         } catch (PDOException $e) {
+            $this->database->rollBack(); // Rollback the transaction if an exception occurs
             error_log("Something went wrong in the database: " . $e->getMessage());
         } catch (Exception $e) {
+            $this->database->rollBack(); // Rollback the transaction if an exception occurs
             error_log("Error: " . $e->getMessage());
         }
     }
-
-
-    /// update wiki
-    //  public function update2($Wiki, $id)
-    //  {
-    //      try {
-    //          $id = $Wiki->getId();
-    //          $title = $Wiki->getTitle();
-    //          $content = $Wiki->getContent();
-    //          $image = $Wiki->getImage();
-    //          $authorId = $Wiki->getAuthorId();
-    //          $categoryId = $Wiki->getCategoryId();
-
-    //          $this->database->beginTransaction(); // Start a transaction
-
-    //          // Step 1: Update wiki details
-    //          $query = "UPDATE `wiki` SET `title` = ?, `content` = ?, `image` = ?, `author_id` = ?, `category_id` = ? WHERE `id` = ? AND author_id = ?";
-    //          $statement = $this->database->prepare($query);
-    //          $statement->execute([$title, $content, $image, $authorId, $categoryId, $id, $authorId]);
-
-    //          // Step 2: Delete existing tag associations
-    //          $deleteTagsQuery = "DELETE FROM `wikitag` WHERE `wiki_id` = ?";
-    //          $deleteTagsStatement = $this->database->prepare($deleteTagsQuery);
-    //          $deleteTagsStatement->execute([$id]);
-
-    //          // Step 3: Insert new tag associations
-    //          $selectedTagIds = $_POST['tags'] ?? [];
-    //          foreach ($selectedTagIds as $tagId) {
-    //              $wikitagQuery = "INSERT INTO `wikitag`(`wiki_id`, `tag_id`) VALUES (?, ?)";
-    //              $wikitagStatement = $this->database->prepare($wikitagQuery);
-    //              $wikitagStatement->execute([$id, $tagId]);
-    //          }
-
-    //          $this->database->commit(); // Commit the transaction
-    //      } catch (PDOException $e) {
-    //          $this->database->rollBack(); // Rollback the transaction if an exception occurs
-    //          error_log("Something went wrong in the database: " . $e->getMessage());
-    //      } catch (Exception $e) {
-    //          $this->database->rollBack(); // Rollback the transaction if an exception occurs
-    //          error_log("Error: " . $e->getMessage());
-    //      }
-    //  }
 
 
 

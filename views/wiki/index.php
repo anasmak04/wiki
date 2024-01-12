@@ -6,19 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Blog Insert Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <link rel="stylesheet" href="/wiki/public/css/wiki.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 
 <body class="bg-light">
 
     <header class="bg-dark text-white text-center py-2">
-        <!-- <p>welcome : <?= $_SESSION["username"] ?></p> -->
         <h1 class="mb-0">Insert new wiki</h1>
     </header>
+
     <main class="container mt-4">
         <form action="wikisave" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="id">
@@ -52,7 +54,7 @@
 
                 <div class="form-group">
                     <label for="multiple-tags">Tags:</label>
-                    <select id="multiple-tags" class="form-control" name="tags[]" multiple>
+                    <select class="js-example-basic-multiple" name="tags[]" multiple="multiple">
                         <?php foreach ($tags as $tag) { ?>
                             <option value="<?= $tag->id ?>"><?= $tag->name ?></option>
                         <?php } ?>
@@ -64,6 +66,11 @@
         </form>
     </main>
 
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
     <script src="/wiki/public/js/tiny.js"></script>
 </body>
 

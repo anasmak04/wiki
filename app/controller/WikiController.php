@@ -35,10 +35,8 @@ class WikiController
                     $wiki = new Wiki(null, $title, $content, $imagePath, null, null, null, $categoryId);
                     $this->wikiModel->save($wiki);
     
-                    // Set a session variable with the message
                     $_SESSION['wiki_added_message'] = "Wiki added successfully. The wiki will be displayed after admin approval.";
     
-                    // Redirect to the desired location
                     header("Location: displayWiki");
                     exit;
                 }
