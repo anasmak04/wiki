@@ -27,6 +27,13 @@ class CategoryController
         }
     }
 
+    public function getAllcategories2()
+    {
+        $categories = $this->categoryModel->findAll();
+        require_once("../../views/wiki/updateview.php");
+    }
+    
+
 
     public function getAllcategories()
     {

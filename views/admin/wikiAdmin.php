@@ -1,4 +1,4 @@
-<?php 
+<?php
 if (!isset($_SESSION['userId'])) {
     header("Location: login");
     exit();
@@ -34,6 +34,7 @@ if (!isset($_SESSION['userId'])) {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
+            margin-top: 50px;
         }
 
         th,
@@ -55,7 +56,6 @@ if (!isset($_SESSION['userId'])) {
         .actions {
             display: flex;
             gap: 5px;
-
         }
 
         .actions button {
@@ -64,17 +64,14 @@ if (!isset($_SESSION['userId'])) {
             border-radius: 4px;
             cursor: pointer;
             color: #fff;
-            margin-right: 5px;
         }
 
         .delete-btn {
             background-color: #ff5252;
-            border-color: #ff5252;
         }
 
         .edit-btn {
             background-color: #2196f3;
-            border-color: #2196f3;
         }
     </style>
 </head>
@@ -105,7 +102,7 @@ if (!isset($_SESSION['userId'])) {
     </nav>
 
     <div class="wikis-table">
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -124,7 +121,32 @@ if (!isset($_SESSION['userId'])) {
                     <tr>
                         <td><?php echo $item->id; ?></td>
                         <td><?php echo $item->title; ?></td>
-                        <td><?php echo $item->content; ?></td>
+                        <td>
+                            <!-- Button to trigger modal -->
+                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#contentModal<?= $item->id ?>">
+                                View Content
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="contentModal<?= $item->id ?>" tabindex="-1" role="dialog" aria-labelledby="contentModalLabel<?= $item->id ?>">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="contentModalLabel<?= $item->id ?>">Content</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <?php echo $item->content; ?>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                         <td><img src="<?php echo $item->image; ?>" alt="Wiki Image" style="max-width: 100px;"></td>
                         <td><?php echo $item->status; ?></td>
                         <td><?php echo $item->created_at; ?></td>

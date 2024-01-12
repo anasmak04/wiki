@@ -42,19 +42,9 @@
         </div>
     </div>
 
-    <!-- <script>
-        const form = document.querySelector("form");
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const emailValue = document.getElementById("email").value.trim();
-            const emailError = document.getElementById("emailError");
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            emailError.style.display = !emailValue.match(emailRegex) ? "block" : "none";
-        });
-    </script> -->
 
 
-    <script src="/wiki/public/js/script.js"></script>
+    <!-- <script src="/wiki/public/js/script.js"></script> -->
 
 </body>
 

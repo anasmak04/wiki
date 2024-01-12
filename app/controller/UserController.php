@@ -4,15 +4,19 @@ namespace App\controller;
 
 use App\model\UserImp;
 use App\entity\User;
+use App\model\WikiImp;
 
 class UserController
 {
     private $userModel;
+    private $wikiModel;
 
     public function __construct()
     {
         $usermodel = new UserImp();
+        $wikimodel = new  WikiImp();
         $this->userModel = $usermodel;
+        $this->wikiModel = $wikimodel;
     }
 
     public function save()
@@ -68,7 +72,6 @@ class UserController
 
     public function viewProfile()
     {
-        session_start();
         $userId = $_SESSION["userId"];
         $user = $this->userModel->findById($userId);
 
@@ -79,6 +82,18 @@ class UserController
             echo "User not found.";
         }
     }
+
+    public function profileview(){
+        $userId = $_SESSION["userId"];
+        $user = $this->userModel->findById($userId);
+        $authorid = $_SESSION["userId"];
+        $wikis = $this->wikiModel->findWikisByAuthor($authorid);
+
+        if ($user) {
+            require_once  "../../views/client/profile-view.php";
+        } else {
+            echo "User not found.";
+        }    }
 
 
     public function updateProfile()
@@ -133,7 +148,5 @@ class UserController
         }
     }
 
-    public function archiver(){
-        
-    }
+
 }

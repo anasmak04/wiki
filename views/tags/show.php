@@ -101,6 +101,8 @@
         <div class="text-right" style="margin-bottom: 10px;">
             <a href="http://localhost/wiki/tags" class="btn btn-success">Add New tag</a>
         </div>
+
+        
         <table class="table">
             <thead>
                 <tr>

@@ -76,47 +76,48 @@ class WikiController
     }
 
 
-   public function updateWiki()
-{
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'])) {
-        $wikiId = $_POST['id'];
-        $userId = $_SESSION["userId"];
+    public function updateWiki()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'])) {
+            $wikiId = $_POST['id'];
+            $userId = $_SESSION["userId"];
 
-        // Check if a new image file is uploaded
-        if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            // Process the uploaded image file
-            $uploadDir = '../../public/uploads/';
-            $uploadFile = $uploadDir . basename($_FILES['image']['name']);
-            
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
-                $imagePath = "/wiki/public/uploads/" . $_FILES['image']['name'];
+            // Check if a new image file is uploaded
+            if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                // Process the uploaded image file
+                $uploadDir = '../../public/uploads/';
+                $uploadFile = $uploadDir . basename($_FILES['image']['name']);
+
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+                    $imagePath = "/wiki/public/uploads/" . $_FILES['image']['name'];
+                } else {
+                    // Handle the case where moving the uploaded file fails
+                    // You might want to add proper error handling here
+                    echo "Failed to move the uploaded image file.";
+                    exit;
+                }
             } else {
-                // Handle the case where moving the uploaded file fails
-                // You might want to add proper error handling here
-                echo "Failed to move the uploaded image file.";
-                exit;
+                // No new image uploaded, retain the existing image path
+                $imagePath = $_POST['image'];
             }
-        } else {
-            // No new image uploaded, retain the existing image path
-            $imagePath = $_POST['image'];
+
+            $wiki = new Wiki(
+                $wikiId,
+                $_POST['title'],
+                $_POST['content'],
+                $imagePath,  // Use the updated image path here
+                $_POST['status'],
+                $_POST['created_at'],
+                $userId,
+                $_POST['category_id']
+            );
+
+            $this->wikiModel->update2($wiki, $userId);
+            header("Location: displayWiki");
+            exit;
         }
-
-        $wiki = new Wiki(
-            $wikiId,
-            $_POST['title'],
-            $_POST['content'],
-            $imagePath,  // Use the updated image path here
-            $_POST['status'],
-            $_POST['created_at'],
-            $userId,
-            $_POST['category_id']
-        );
-
-        $this->wikiModel->update2($wiki, $userId);
-        header("Location: displayWiki");
-        exit;
     }
-}
+
 
 
 

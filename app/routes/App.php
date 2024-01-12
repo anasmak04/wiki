@@ -37,6 +37,8 @@ $router->setRoutes([
         "edittagView" => ["TagsController", "editbyid"],
         "detail" => ["WikiController", "detail"],
         "detail" => ["WikiController", "detail"],
+        "profileview" => ["UserController", "profileview"],
+        "categories" => ["CategoryController", "getAllcategories2"]
         // "showikis" => ["WikiController", "wiki2"],
     ],
 

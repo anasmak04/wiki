@@ -59,24 +59,9 @@
 
 
 
-    <script src="/wiki/public/js/script.js"></script>
+    <!-- <script src="/wiki/public/js/script.js"></script> -->
 
-    <!-- <script>
-        const form = document.querySelector("form");
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const nameValue = document.getElementById("name").value.trim();
-            const usernameValue = document.getElementById("username").value.trim();
-            const emailValue = document.getElementById("email").value.trim();
-            const nameError = document.getElementById("nameError");
-            const usernameError = document.getElementById("usernameError");
-            const emailError = document.getElementById("emailError");
-            const nameRegex = /^[a-zA-Z ]+$/;
-            const usernameRegex = /^[a-zA-Z0-9]+$/;
-            nameError.style.display = !nameValue.match(nameRegex) ? "block" : "none";
-            emailError.style.display = !emailValue.match(emailRegex) ? "block" : "none";
-        });
-    </script> -->
+
 
 </body>
 

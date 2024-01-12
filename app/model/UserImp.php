@@ -127,7 +127,6 @@ class UserImp implements DataRepository, AuthRepository
             $statement = $this->database->prepare($query);
             $statement->execute([$email]);
             $user = $statement->fetch();
-            session_start();
 
             if ($user) {
                 $_SESSION["role"] = $user->roleId;

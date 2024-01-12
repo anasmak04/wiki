@@ -1,4 +1,4 @@
-<?php 
+<?php
 if (!isset($_SESSION['userId'])) {
     header("Location: login");
     exit();
@@ -48,34 +48,53 @@ if (!isset($_SESSION['userId'])) {
             width: 100% !important;
             height: auto !important;
         }
+
+        .card-box {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-box h4 {
+            color: #04AA6D;
+            margin-bottom: 10px;
+        }
+
+        .card-box p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
     </style>
 </head>
 
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header text-center">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="d-flex justify-content-center align-items-center">
-                <img src="/wiki/public/assets/logo.svg" alt="" class="navbar-brand">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header text-center">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="/wiki/public/assets/logo.svg" alt="" class="navbar-brand">
+                </div>
+            </div>
+            <div class="collapse navbar-collapse text-center" id="myNavbar">
+                <ul class="nav navbar-nav navbar-center">
+                    <li class="active"><a href="">Dashboard</a></li>
+                    <li><a href="categories">Category</a></li>
+                    <li><a href="Adminwiki">Wiki</a></li>
+                    <li><a href="show">Tags</a></li>
+                    <li><a href="users">Users</a></li>
+                </ul>
             </div>
         </div>
-        <div class="collapse navbar-collapse text-center" id="myNavbar">
-            <ul class="nav navbar-nav navbar-center">
-                <li class="active"><a href="">Dashboard</a></li>
-                <li><a href="categories">Category</a></li>
-                <li><a href="Adminwiki">Wiki</a></li>
-                <li><a href="show">Tags</a></li>
-                <li><a href="users">Users</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+    </nav>
 
 
     <div class="container-fluid">
@@ -83,7 +102,7 @@ if (!isset($_SESSION['userId'])) {
             <div class="col-sm-12 content">
                 <div class="row well-box">
                     <h4 class="text-center">Dashboard</h4>
-                    <p class="text-center">Welcome to the Dashboard!</p>
+                    <p class="text-center">Welcome to the Dashboard! <?= $_SESSION["username"]; ?></p>
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
@@ -97,6 +116,7 @@ if (!isset($_SESSION['userId'])) {
                             <h4>Categories</h4>
                             <p><?= $categoryCount->total_categories; ?></p>
                         </div>
+
                     </div>
                     <div class="col-sm-3">
                         <div class="card-box">
@@ -118,18 +138,7 @@ if (!isset($_SESSION['userId'])) {
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-8">
-                        <div class="well-box">
-                            <p>Text</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="well-box">
-                            <p>Text</p>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
