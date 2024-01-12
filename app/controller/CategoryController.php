@@ -21,9 +21,7 @@ class CategoryController
             $name = $_POST["name"];
             $category = new Category(null, $name);
             $this->categoryModel->save($category);
-            echo '<script>alert("Welcome to Geeks for Geeks")</script>'; 
-
-
+            echo '<script>alert("Welcome to Geeks for Geeks")</script>';
         }
     }
 
@@ -32,7 +30,7 @@ class CategoryController
         $categories = $this->categoryModel->findAll();
         require_once("../../views/wiki/updateview.php");
     }
-    
+
 
 
     public function getAllcategories()
@@ -58,15 +56,12 @@ class CategoryController
     }
 
 
-    // public function findAllCategories()
-    // {
-    //     $categories = $this->categoryModel->findAll();
-    //     if (!empty($categories)) {
-    //         require_once  "../../views/index.php";
-    //     } else {
-    //         echo "Categories not found.";
-    //     }
-    // }
+    public function findAllCategories()
+    {
+        $categorie = $this->categoryModel->findAll();
+
+        require_once  "../../views/wiki/updateview.php";
+    }
 
     public function viewcategory()
     {
@@ -88,17 +83,15 @@ class CategoryController
             $category = new Category(null, null);
             $category->setName($_POST["name"]);
             $this->categoryModel->update($category);
-            
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editsubmit'])) {
-            $category = new Category(null,"");
+            $category = new Category(null, "");
             $category->setId($_POST['id']);
             $category->setName($_POST['name']);
             $this->categoryModel->update($category);
             header("Location: categories");
             exit;
         }
-        
     }
 }

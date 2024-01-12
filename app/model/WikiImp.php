@@ -66,7 +66,7 @@ class WikiImp implements DataRepository
         }
     }
 
-    public function update2($Wiki,$id)
+    public function update2($Wiki, $id)
     {
         try {
             $id = $Wiki->getId();
@@ -75,10 +75,10 @@ class WikiImp implements DataRepository
             $image = $Wiki->getImage();
             $authorId = $Wiki->getAuthorId();
             $categoryId = $Wiki->getCategoryId();
-    
+
             $query = "UPDATE `wiki` SET `title` = ?, `content` = ?, `image` = ?, `author_id` = ?, `category_id` = ? WHERE `id` = ? AND author_id = ?";
             $statement = $this->database->prepare($query);
-    
+
             $statement->execute([$title, $content, $image, $authorId, $categoryId, $id, $authorId]);
         } catch (PDOException $e) {
             error_log("Something went wrong in the database: " . $e->getMessage());
@@ -86,9 +86,9 @@ class WikiImp implements DataRepository
             error_log("Error: " . $e->getMessage());
         }
     }
-    
-        
-     /// update wiki
+
+
+    /// update wiki
     //  public function update2($Wiki, $id)
     //  {
     //      try {
@@ -98,19 +98,19 @@ class WikiImp implements DataRepository
     //          $image = $Wiki->getImage();
     //          $authorId = $Wiki->getAuthorId();
     //          $categoryId = $Wiki->getCategoryId();
-     
+
     //          $this->database->beginTransaction(); // Start a transaction
-     
+
     //          // Step 1: Update wiki details
     //          $query = "UPDATE `wiki` SET `title` = ?, `content` = ?, `image` = ?, `author_id` = ?, `category_id` = ? WHERE `id` = ? AND author_id = ?";
     //          $statement = $this->database->prepare($query);
     //          $statement->execute([$title, $content, $image, $authorId, $categoryId, $id, $authorId]);
-     
+
     //          // Step 2: Delete existing tag associations
     //          $deleteTagsQuery = "DELETE FROM `wikitag` WHERE `wiki_id` = ?";
     //          $deleteTagsStatement = $this->database->prepare($deleteTagsQuery);
     //          $deleteTagsStatement->execute([$id]);
-     
+
     //          // Step 3: Insert new tag associations
     //          $selectedTagIds = $_POST['tags'] ?? [];
     //          foreach ($selectedTagIds as $tagId) {
@@ -118,7 +118,7 @@ class WikiImp implements DataRepository
     //              $wikitagStatement = $this->database->prepare($wikitagQuery);
     //              $wikitagStatement->execute([$id, $tagId]);
     //          }
-     
+
     //          $this->database->commit(); // Commit the transaction
     //      } catch (PDOException $e) {
     //          $this->database->rollBack(); // Rollback the transaction if an exception occurs
@@ -128,7 +128,7 @@ class WikiImp implements DataRepository
     //          error_log("Error: " . $e->getMessage());
     //      }
     //  }
-     
+
 
 
 
@@ -204,7 +204,11 @@ class WikiImp implements DataRepository
     public function findAll2()
     {
         try {
-            $query = "SELECT w.* , u.name AS Author, c.name AS categoryName FROM wiki w LEFT JOIN user u ON w.author_id = u.id LEFT JOIN category c ON w.category_id = c.id";
+            $query = "SELECT w.*, u.name AS Author, c.name AS categoryName
+            FROM wiki w
+            INNER JOIN user u ON w.author_id = u.id
+            INNER JOIN category c ON w.category_id = c.id;
+            ";
 
             $statement = $this->database->prepare($query);
             $statement->execute();
@@ -309,7 +313,7 @@ class WikiImp implements DataRepository
 
 
 
-   
+
 
 
 

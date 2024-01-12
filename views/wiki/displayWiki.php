@@ -1,3 +1,10 @@
+<?php
+if (isset($_SESSION['wiki_added_message'])) {
+    echo '<script>alert("' . $_SESSION['wiki_added_message'] . '");</script>';
+    unset($_SESSION['wiki_added_message']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

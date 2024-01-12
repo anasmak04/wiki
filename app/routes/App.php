@@ -38,7 +38,7 @@ $router->setRoutes([
         "detail" => ["WikiController", "detail"],
         "detail" => ["WikiController", "detail"],
         "profileview" => ["UserController", "profileview"],
-        "categories" => ["CategoryController", "getAllcategories2"]
+        "categorie" => ["WikiController", "findAllCategories"]
         // "showikis" => ["WikiController", "wiki2"],
     ],
 
