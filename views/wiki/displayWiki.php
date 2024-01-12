@@ -30,7 +30,7 @@ if (isset($_SESSION['wiki_added_message'])) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-                    <?php if (!isset($_SESSION["role"]) || $_SESSION["role"] === 'guest') { ?>
+                    <?php if (!isset($_SESSION["role"])) { ?>
                         <a href="http://localhost/wiki/register" class="btn btn-primary">Join</a>
 
                     <?php } ?>
@@ -80,7 +80,8 @@ if (isset($_SESSION['wiki_added_message'])) {
                         <div class="badge bg-primary"><?= $wikis[0]->tag_names ?></div> <br>
                         <div class="badge bg-secondary"> <?= $wikis[0]->category_name ?></div>
                         <h2 class="card-title"><?= $wikis[0]->title ?></h2>
-                        <p class="card-text"><?= $wikis[0]->content ?></p>
+                        <p class="card-text"><?= substr($wikis[0]->content, 0, 300) ?></p>
+
 
                         <?php
                         if (isset($_SESSION["userId"]) && $_SESSION["userId"] == $wikis[0]->author_id) :
@@ -104,6 +105,19 @@ if (isset($_SESSION['wiki_added_message'])) {
                             <input type="hidden" name="id" value="<?= $wikis[0]->id ?>">
                             <button type="submit" class="btn btn-info">Details</button>
                         </form>
+
+
+                        <?php
+
+                        if ($_SESSION["role"] == 1) {
+                        ?>
+                            <form action="archiver" method="POST" class="d-inline">
+                                <input type="hidden" name="id" value="<?= $wikis[0]->id ?>">
+                                <button type="submit" class="btn btn-dark">Archiver</button>
+                            </form>
+                        <?php
+                        }
+                        ?>
                     </div>
 
                 </div>
@@ -122,7 +136,7 @@ if (isset($_SESSION['wiki_added_message'])) {
                                     <div class="badge bg-primary"><?= $wiki->tag_names ?></div> <br>
                                     <div class="badge bg-secondary"> <?= $wikis[0]->category_name ?></div>
                                     <h2 class="card-title h4"><?= $wiki->title ?></h2>
-                                    <p class="card-text"><?= $wiki->content ?>.</p>
+                                    <p class="card-text"><?= substr($wiki->content, 0, 300) ?></p>
                                     <?php
                                     if (isset($_SESSION["userId"]) && $_SESSION["userId"] == $wiki->author_id) :
                                     ?> <!-- Delete Button -->
@@ -142,6 +156,18 @@ if (isset($_SESSION['wiki_added_message'])) {
                                         <input type="hidden" name="id" value="<?= $wiki->id ?>">
                                         <button type="submit" class="btn btn-info">Details</button>
                                     </form>
+
+                                    <?php
+
+                                    if ($_SESSION["role"] == 1) {
+                                    ?>
+                                        <form action="archiver" method="POST" class="d-inline">
+                                            <input type="hidden" name="id" value="<?= $wiki->id ?>">
+                                            <button type="submit" class="btn btn-dark">Archiver</button>
+                                        </form>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>

@@ -19,6 +19,12 @@
                     <div class="input-field">
                         <input type="password" placeholder="Enter your password" name="password" required id="password">
                     </div>
+                    <span><?php
+                            if (isset($_SESSION["error"])) {
+                                echo '<div class="error-message">' . $_SESSION["error"] . '</div>';
+                                unset($_SESSION["error"]);
+                            }
+                            ?></span>
                     <button type="submit" name="submitLogin" class="btn">login</button>
                 </form>
             </div>

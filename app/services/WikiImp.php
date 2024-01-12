@@ -1,6 +1,6 @@
 <?php
 
-namespace App\model;
+namespace  App\services;
 
 use App\dao\DataRepository;
 use App\config\Dbconfig;

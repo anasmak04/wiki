@@ -5,26 +5,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/wiki/public/css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/wiki/public/css/styles.css"></head>
 </head>
-
+<style>.con{margin-top: 90px;}</style>
 <body>
 
-    <form action="saveTag" method="POST"  id="myForm">
-        <label for="multipleValues">Enter multiple values:</label>
-        <input type="text" name="name" id="multipleValues">
-        <button type="submit" name="submitTag">Submit</button>
-    </form>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header text-center">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="/wiki/public/assets/logo.svg" alt="" class="navbar-brand">
+                </div>
+            </div>
+            <div class="collapse navbar-collapse text-center" id="myNavbar">
+                <ul class="nav navbar-nav navbar-center">
+                    <li class="active"><a href="">Dashboard</a></li>
+                    <li><a href="categories">Category</a></li>
+                    <li><a href="Adminwiki">Wiki</a></li>
+                    <li><a href="show">Tags</a></li>
+                    <li><a href="users">Users</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <!-- <script>
-        document.getElementById('myForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const inputElement = document.getElementById('multipleValues');
-            const enteredValue = inputElement.value.trim();
-            const selectedValues = enteredValue.split(',').map(value => value.trim());
-            console.log('Selected values:', selectedValues);
-        });
-    </script> -->
+    <div class="con">
+        <p>insert new category</p>
+
+        <form action="saveTag" method="POST" id="myForm">
+            <label for="multipleValues">Enter multiple values:</label>
+            <input type="text" name="name" id="multipleValues">
+            <button type="submit" name="submitTag">Submit</button>
+        </form>
+
+    </div>
 
 
 

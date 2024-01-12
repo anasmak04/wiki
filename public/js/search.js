@@ -61,6 +61,6 @@ function hideExistingCards() {
 function showExistingCards() {
   const existingCards = document.querySelectorAll(".existing-card");
   existingCards.forEach((card) => {
-    card.style.display = "block"; // or 'initial', depending on your styling
+    card.style.display = "block";
   });
 }

@@ -87,6 +87,7 @@ if (!isset($_SESSION['userId'])) {
             <div class="collapse navbar-collapse text-center" id="myNavbar">
                 <ul class="nav navbar-nav navbar-center">
                     <li class="active"><a href="">Dashboard</a></li>
+                    <li><a href="displayWiki">landing page</a></li>
                     <li><a href="categories">Category</a></li>
                     <li><a href="Adminwiki">Wiki</a></li>
                     <li><a href="show">Tags</a></li>

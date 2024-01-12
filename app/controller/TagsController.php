@@ -3,8 +3,8 @@
 namespace App\controller;
 
 use App\entity\Tag;
-use App\model\CategoryImp;
-use App\model\TagImp;
+use App\services\CategoryImp;
+use App\services\TagImp;
 
 class TagsController
 {

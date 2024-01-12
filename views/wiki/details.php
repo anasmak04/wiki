@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +8,6 @@
     <link rel="stylesheet" href="/wiki/public/css/style3.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 
-
     <title>Wiki Detail</title>
 </head>
 
@@ -18,7 +15,9 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light border">
         <div class="container">
-            <img src="/wiki/public/assets/logo.svg" class="navbar-brand" href="#!"></img>
+            <a class="navbar-brand" href="#!">
+                <img src="/wiki/public/assets/logo.svg" alt="Logo" height="30" class="d-inline-block align-top">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,25 +25,27 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                     <?php if (!isset($_SESSION["role"]) || $_SESSION["role"] === 'guest') { ?>
-                        <a href="http://localhost/wiki/register" class="btn btn-primary">Join</a>
-
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="http://localhost/wiki/register">Join</a>
+                        </li>
                     <?php } ?>
 
                     <?php if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2 || $_SESSION["role"] == 1)) { ?>
-                        <div class="avatar-dropdown">
-                            <img style="width:50px;" src="<?php echo isset($_SESSION["image"]) ? $_SESSION["image"] : ''; ?>" alt="" class="avatar">
-                            <ul class="dropdown-menu">
-                                <li><a href="http://localhost/wiki/profile">View Profile</a></li>
-                                <li><a href="http://localhost/wiki/logout">Logout</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img style="width:50px;" src="<?php echo isset($_SESSION["image"]) ? $_SESSION["image"] : ''; ?>" alt="" class="avatar">
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="http://localhost/wiki/profile">View Profile</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/wiki/logout">Logout</a></li>
                             </ul>
-                        </div>
+                        </li>
                     <?php } ?>
 
                 </ul>
             </div>
         </div>
     </nav>
-
 
     <div class="container container-contact bootstrap snippets bootdeys bootdey">
         <?php if ($wiki) : ?>
@@ -67,6 +68,20 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <?= $wiki->user_email; ?>
+                                    </div>
+
+                                    <div class="col-xs-3">
+                                        linkedin:
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <?= $wiki->user_linkedin; ?>
+                                    </div>
+
+                                    <div class="col-xs-3">
+                                        github:
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <?= $wiki->user_github; ?>
                                     </div>
                                     <!-- Add other user details as needed -->
                                 </div>

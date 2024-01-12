@@ -4,8 +4,8 @@
 namespace App\controller;
 
 use App\entity\Wiki;
-use App\model\AdminImp;
-use App\model\WikiImp;
+use App\services\AdminImp;
+use App\services\WikiImp;
 use Exception;
 
 class AdminController

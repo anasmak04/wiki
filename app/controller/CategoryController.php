@@ -3,7 +3,7 @@
 namespace App\controller;
 
 use App\entity\Category;
-use App\model\CategoryImp;
+use App\services\CategoryImp;
 
 class CategoryController
 {

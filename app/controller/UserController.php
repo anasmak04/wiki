@@ -2,9 +2,9 @@
 
 namespace App\controller;
 
-use App\model\UserImp;
 use App\entity\User;
-use App\model\WikiImp;
+use App\services\UserImp;
+use App\services\WikiImp;
 
 class UserController
 {
@@ -83,7 +83,8 @@ class UserController
         }
     }
 
-    public function profileview(){
+    public function profileview()
+    {
         $userId = $_SESSION["userId"];
         $user = $this->userModel->findById($userId);
         $authorid = $_SESSION["userId"];
@@ -93,7 +94,8 @@ class UserController
             require_once  "../../views/client/profile-view.php";
         } else {
             echo "User not found.";
-        }    }
+        }
+    }
 
 
     public function updateProfile()
@@ -147,6 +149,4 @@ class UserController
             exit;
         }
     }
-
-
 }

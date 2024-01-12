@@ -1,7 +1,7 @@
 <?php
 
 
-namespace  App\model;
+namespace  App\services;
 
 use App\config\Dbconfig;
 use App\dao\AdminRepository;

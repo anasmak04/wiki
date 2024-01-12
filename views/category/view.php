@@ -1,9 +1,4 @@
-<?php 
-if (!isset($_SESSION['userId'])) {
-    header("Location: login");
-    exit();
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 

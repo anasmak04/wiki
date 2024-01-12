@@ -16,7 +16,9 @@ form {
 
 input[type="text"],
 input[type="hidden"],
-button[type="submit"] {
+input[type="number"],
+button[type="submit"]
+ {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;

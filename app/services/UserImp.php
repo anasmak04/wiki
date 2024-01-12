@@ -1,6 +1,6 @@
 <?php
 
-namespace App\model;
+namespace  App\services;
 
 use App\dao\DataRepository;
 use App\dao\AuthRepository;
@@ -119,23 +119,22 @@ class UserImp implements DataRepository, AuthRepository
         try {
             $email = $User->getEmail();
             $password = $User->getPassword();
-
-            $query = "SELECT u.id AS id_user, u.name AS userName, u.image AS imagep , u.email AS userEmail , r.id AS roleId, u.password 
+    
+            $query = "SELECT u.id AS id_user, u.name AS userName, u.image AS imagep, u.email AS userEmail, r.id AS roleId, u.password 
                   FROM user u 
                   INNER JOIN role r ON u.role_id = r.id 
                   WHERE u.email = ?";
             $statement = $this->database->prepare($query);
             $statement->execute([$email]);
             $user = $statement->fetch();
-
+    
             if ($user) {
                 $_SESSION["role"] = $user->roleId;
                 $_SESSION["userId"] = $user->id_user;
                 $_SESSION["username"] = $user->userName;
                 $_SESSION["image"] = $user->imagep;
+    
                 if (password_verify($password, $user->password)) {
-
-
                     if ($_SESSION["role"] == 2) {
                         header("Location: displayWiki");
                         exit();
@@ -144,13 +143,20 @@ class UserImp implements DataRepository, AuthRepository
                         exit();
                     }
                 } else {
-                    echo "Incorrect password";
+                    $_SESSION["error"] = "Incorrect password";
+                    header("Location: login"); 
+                    exit();
                 }
             } else {
-                echo "Email does not exist";
+                $_SESSION["error"] = "Email does not exist";
+                header("Location: login"); 
+                exit();
             }
         } catch (PDOException $e) {
-            echo "Something went wrong: " . $e->getMessage();
+            $_SESSION["error"] = "Something went wrong: " . $e->getMessage();
+            header("Location: login"); 
+            exit();
         }
     }
+    
 }

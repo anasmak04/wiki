@@ -1,7 +1,7 @@
 <?php
 
-use App\model\CategoryImp;
-use App\model\TagImp;
+use App\services\CategoryImp;
+use App\services\TagImp;
 
 $cat = new CategoryImp();
 $tag = new TagImp();
@@ -22,6 +22,8 @@ $tags = $tag->findAll();
 </head>
 
 <body class="container mt-4">
+
+
 
     <?php if ($wiki) : ?>
         <form action="wupdate" method="POST" enctype="multipart/form-data">
