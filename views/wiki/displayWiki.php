@@ -109,7 +109,7 @@ if (isset($_SESSION['wiki_added_message'])) {
 
                         <?php
 
-                        if ($_SESSION["role"] == 1) {
+                        if (isset($_SESSION["role"]) && $_SESSION["role"] == 1) {
                         ?>
                             <form action="archiver" method="POST" class="d-inline">
                                 <input type="hidden" name="id" value="<?= $wikis[0]->id ?>">
@@ -156,10 +156,8 @@ if (isset($_SESSION['wiki_added_message'])) {
                                         <input type="hidden" name="id" value="<?= $wiki->id ?>">
                                         <button type="submit" class="btn btn-info">Details</button>
                                     </form>
-
                                     <?php
-
-                                    if ($_SESSION["role"] == 1) {
+                                    if (isset($_SESSION["role"]) && $_SESSION["role"] == 1) {
                                     ?>
                                         <form action="archiver" method="POST" class="d-inline">
                                             <input type="hidden" name="id" value="<?= $wiki->id ?>">
